@@ -21,7 +21,8 @@ public class MyActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         SharedPreferences settings = getSharedPreferences("Login", Context.MODE_PRIVATE);
         String key = settings.getString("key", "PurduePlaza");
-        if(key != null) {   //We have the key stored, so we're already auth'ed.
+        if(key != null && key != "") {   //We have the key stored, so we're already auth'ed.
+            System.out.println("KEY: " + key);
             Intent homeIntent = new Intent(getApplicationContext(),HomeActivity.class);
             startActivity(homeIntent);
         }

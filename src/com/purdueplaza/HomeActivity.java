@@ -68,13 +68,7 @@ public class HomeActivity extends Activity{
 
             @Override
             public void onFailure(int statusCode, Throwable error, String content) {
-                if (statusCode == 404) {
-                    Toast.makeText(getApplicationContext(), "Error 404: Requested resource not found", Toast.LENGTH_LONG).show();
-                } else if (statusCode == 500) {
-                    Toast.makeText(getApplicationContext(), "Error 500: Something went wrong at server end", Toast.LENGTH_LONG).show();
-                } else {
-                    Toast.makeText(getApplicationContext(), "Incorrect email address", Toast.LENGTH_LONG).show();
-                }
+                Toast.makeText(getApplicationContext(), "Error " + statusCode + "; " + content, Toast.LENGTH_LONG).show();
             }
         });
 
