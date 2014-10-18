@@ -20,7 +20,11 @@ public class Event extends Activity{
                 rsvp(v);
             }
         });
-    });
+    }
+
+    public void rsvp(View view) {
+
+    }
 
 
 
