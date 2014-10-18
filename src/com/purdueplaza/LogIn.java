@@ -60,13 +60,10 @@ public class LogIn extends Activity {
         String email = username.getText().toString();
         String pass = password.getText().toString();
         RequestParams params = new RequestParams();
-        if(Utility.isNotNull(email) && Utility.isNotNull(pass)){
-            params.put("email", email);
-            params.put("password", pass);
-            invokeWS(params);
-        } else{
-            Toast.makeText(getApplicationContext(), "Please fill the form, don't leave any field blank", Toast.LENGTH_LONG).show();
-        }
+        /*  We don't need to check if parameters are correct, they are checked on the server side.  */
+        params.put("email", email);
+        params.put("password", pass);
+        invokeWS(params);
     }
 
     public void invokeWS(RequestParams params){
