@@ -1,5 +1,8 @@
 package com.purdueplaza;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import android.app.Activity;
 import android.os.Bundle;
 import android.widget.Button;
@@ -7,6 +10,13 @@ import android.view.View;
 import android.widget.EditText;
 import android.view.View.OnClickListener;
 import android.widget.Toast;
+import android.content.Intent;
+
+
+
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
 
 public class LogIn extends Activity {
 
@@ -20,8 +30,8 @@ public class LogIn extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getActionBar().hide();
         setContentView(R.layout.login);
-
         addListenerOnButton();
 
     }
@@ -37,13 +47,64 @@ public class LogIn extends Activity {
             @Override
             public void onClick(View v) {
 
-                Toast.makeText(LogIn.this, username.getText(), Toast.LENGTH_SHORT).show();
-                Toast.makeText(LogIn.this, password.getText(), Toast.LENGTH_SHORT).show();
+                submit(v);
 
             }
 
         });
+    }
 
+    public void submit(View view) {
+        String email = username.getText().toString();
+        String pass = password.getText().toString();
+        RequestParams params = new RequestParams();
+        if(Utility.isNotNull(email) && Utility.isNotNull(pass)){
+            params.put("email", email);
+            params.put("password", pass);
+            invokeWS(params);
+        } else{
+            Toast.makeText(getApplicationContext(), "Please fill the form, don't leave any field blank", Toast.LENGTH_LONG).show();
+        }
+    }
+
+    public void invokeWS(RequestParams params){
+        AsyncHttpClient client = new AsyncHttpClient();
+        client.post("http://167.88.118.116/login",params ,new AsyncHttpResponseHandler() {
+            @Override
+            public void onSuccess(String response) {
+                try {
+                    JSONObject obj = new JSONObject(response);
+                    if(obj.getBoolean("error") == false){
+                        Toast.makeText(getApplicationContext(), "You are successfully logged in!", Toast.LENGTH_LONG).show();
+                        navigateToHomeActivity();
+                    }
+                    else{
+                        Toast.makeText(getApplicationContext(), "Incorrect email or password", Toast.LENGTH_LONG).show();
+                    }
+                } catch (JSONException e) {
+                    Toast.makeText(getApplicationContext(), "Error: " + e, Toast.LENGTH_LONG).show();
+                    e.printStackTrace();
+                }
+            }
+            // When the response returned by REST has Http response code other than '200'
+            @Override
+            public void onFailure(int statusCode, Throwable error, String content) {
+                if(statusCode == 404){
+                    Toast.makeText(getApplicationContext(), "Error 404: Requested resource not found.", Toast.LENGTH_LONG).show();
+                }
+                else if(statusCode == 500){
+                    Toast.makeText(getApplicationContext(), "Error 500: Something went wrong at server end.", Toast.LENGTH_LONG).show();
+                }
+                else{
+                    Toast.makeText(getApplicationContext(), "Error " + statusCode, Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+    }
+
+    public void navigateToHomeActivity(){
+        Intent homeIntent = new Intent(getApplicationContext(),HomeActivity.class);
+        startActivity(homeIntent);
     }
 
 }

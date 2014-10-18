@@ -3,12 +3,33 @@
               android:orientation="vertical"
               android:layout_width="fill_parent"
               android:layout_height="fill_parent"
+              android:background="@drawable/blueglow"
         >
+    <TextView
+            android:textSize="120dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            />
+    <TextView
+            android:textSize="50dp"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Purdue Plaza"
+            android:textColor="#ff515153"
+            android:textStyle="bold"
+            />
+    <TextView
+            android:textSize="100dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            />
     <Button
             android:id="@+id/register_button"
             android:layout_gravity="center_horizontal|bottom"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
+            android:textColor="#ff50c6d1"
             android:text="Register"
             android:onClick="register"
             />
@@ -19,6 +40,7 @@
             android:layout_height="wrap_content"
             android:text="Log In"
             android:onClick="logIn"
+            android:textColor="#ff50c6d1"
             />
 </LinearLayout>
 

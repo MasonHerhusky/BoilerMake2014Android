@@ -3,11 +3,30 @@
               android:orientation="vertical"
               android:layout_width="fill_parent"
               android:layout_height="fill_parent"
+              android:background="@drawable/blueglow"
         >
+    <TextView
+            android:textSize="125dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            />
+    <TextView
+            android:textSize="25dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Please Enter Your Login Details"
+            android:textColor="#ff484848"
+            android:layout_gravity="center"
+            />
+    <TextView
+            android:textSize="75dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            />
     <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Username"
+            android:text="Email"
             android:layout_gravity="center"
             android:textSize="20dp"
             />

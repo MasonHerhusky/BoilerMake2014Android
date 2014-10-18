@@ -18,11 +18,12 @@ public class MyActivity extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getActionBar().hide();
         setContentView(R.layout.main);
         Button register_button = (Button) findViewById(R.id.register_button);
         register_button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                //    setContentView();
+                register(v);
             }
         });
         Button log_in_button = (Button) findViewById(R.id.log_in_button);
@@ -36,6 +37,11 @@ public class MyActivity extends Activity {
 
     public void logIn(View view) {
         Intent intent = new Intent(this, LogIn.class);
+        startActivity(intent);
+    }
+
+    public void register(View view) {
+        Intent intent = new Intent(this, Register.class);
         startActivity(intent);
     }
 }
