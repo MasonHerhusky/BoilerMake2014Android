@@ -111,7 +111,7 @@ public class LogIn extends Activity {
     }
 
     public void navigateToMainActivity(){
-        Intent mainIntent = new Intent(getApplicationContext(),MyActivity.class);
+        Intent mainIntent = new Intent(getApplicationContext(),HomeActivity.class);
         startActivity(mainIntent);
     }
 
