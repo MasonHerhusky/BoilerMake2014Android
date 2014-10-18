@@ -14,15 +14,16 @@ public class Event extends Activity{
         super.onCreate(savedInstanceState);
         getActionBar().hide();
         setContentView(R.layout.event);
-        Button rsvp_button = (Button) findViewById(R.id.rsvp_button);
-        rsvp_button.setOnClickListener(new View.OnClickListener() {
+        Button attend_button = (Button) findViewById(R.id.attend_button);
+        attend_button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                rsvp(v);
+                String event_id = getIntent().getStringExtra("event_id");
+                attend(event_id);
             }
         });
     }
 
-    public void rsvp(View view) {
+    public void attend(String event_id) {
 
     }
 
