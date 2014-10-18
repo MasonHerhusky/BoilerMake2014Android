@@ -63,15 +63,11 @@ public class Register extends Activity {
         String eml = email.getText().toString();
         String psswrd = password.getText().toString();
         RequestParams params = new RequestParams();
-        if (Utility.isNotNull(nme) && Utility.isNotNull(eml) && Utility.isNotNull(psswrd)) {
-            params.put("name", nme);
-            params.put("email", eml);
-            params.put("password", psswrd);
-            invokeWS(params);
-        }
-        else{
-            Toast.makeText(getApplicationContext(), "Please fill the form, don't leave any field blank", Toast.LENGTH_LONG).show();
-        }
+        /*  We don't need to check if parameters are correct, they are checked on the server side.  */
+        params.put("name", nme);
+        params.put("email", eml);
+        params.put("password", psswrd);
+        invokeWS(params);
     }
 
     /**
@@ -79,7 +75,7 @@ public class Register extends Activity {
      *
      * @param params
      */
-    public void invokeWS(RequestParams params){
+    public void invokeWS(RequestParams params) {
         AsyncHttpClient client = new AsyncHttpClient();
         client.post("http://167.88.118.116/register",params ,new AsyncHttpResponseHandler() {
             @Override
@@ -87,11 +83,11 @@ public class Register extends Activity {
                 try {
                     JSONObject obj = new JSONObject(response);
                     if(obj.getBoolean("error") == false){
-                        Toast.makeText(getApplicationContext(), "You are successfully registered!", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), obj.getString("message"), Toast.LENGTH_LONG).show();
                         navigatetoLoginActivity();
                     }
                     else{
-                        Toast.makeText(getApplicationContext(), response, Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), obj.getString("message"), Toast.LENGTH_LONG).show();
                     }
                 } catch (JSONException e) {
                     Toast.makeText(getApplicationContext(), "Error: " + e, Toast.LENGTH_LONG).show();

@@ -76,7 +76,7 @@ public class LogIn extends Activity {
                     //how to access the obj's api code and store in memory so user can stay logged in?
 
                     if(obj.getBoolean("error") == false){
-                        Toast.makeText(getApplicationContext(), "You are successfully logged in!", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), obj.getString("message"), Toast.LENGTH_LONG).show();
 
                         /*  Store the new found key in storage for future use.  */
                         SharedPreferences settings = getSharedPreferences("Login", Context.MODE_PRIVATE);
@@ -87,7 +87,7 @@ public class LogIn extends Activity {
                         navigateToMainActivity();
                     }
                     else{
-                        Toast.makeText(getApplicationContext(), "Incorrect email or password", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), obj.getString("message"), Toast.LENGTH_LONG).show();
                     }
                 } catch (JSONException e) {
                     Toast.makeText(getApplicationContext(), "Error: " + e, Toast.LENGTH_LONG).show();
