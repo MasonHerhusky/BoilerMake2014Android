@@ -39,7 +39,7 @@
                 android:layout_height="wrap_content"
                 android:text="Search"
                 android:onClick="searchEvents"
-                android:id="@+id/register_button"/>
+                android:id="@+id/search_button"/>
         android:gravity="center"
     </LinearLayout>
 
@@ -49,12 +49,14 @@
             android:layout_gravity="center"
             android:text="Register New Event"
             android:textSize="15dp"
+            android:id="@+id/register_button"
             />
 
     <ListView
             android:layout_width="match_parent"
             android:layout_height="412dp"
             android:id="@+id/listView"
-            android:choiceMode="none"/>
+            android:choiceMode="none"
+            />
 
 </LinearLayout>
