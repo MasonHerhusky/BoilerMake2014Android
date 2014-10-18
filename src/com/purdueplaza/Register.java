@@ -80,34 +80,29 @@ public class Register extends Activity {
         client.post("http://167.88.118.116/register",params ,new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(String response) {
-                try {
-                    JSONObject obj = new JSONObject(response);
-                    if(obj.getBoolean("error") == false){
-                        Toast.makeText(getApplicationContext(), obj.getString("message"), Toast.LENGTH_LONG).show();
-                        navigatetoLoginActivity();
-                    }
-                    else{
-                        Toast.makeText(getApplicationContext(), obj.getString("message"), Toast.LENGTH_LONG).show();
-                    }
-                } catch (JSONException e) {
-                    Toast.makeText(getApplicationContext(), "Error: " + e, Toast.LENGTH_LONG).show();
-                    e.printStackTrace();
-
-                }
+                displayResponse(response);
             }
             @Override
             public void onFailure(int statusCode, Throwable error, String content) {
-                if(statusCode == 404){
-                    Toast.makeText(getApplicationContext(), "Error 404: Requested resource not found", Toast.LENGTH_LONG).show();
-                }
-                else if(statusCode == 500){
-                    Toast.makeText(getApplicationContext(), "Error 500: Something went wrong at server end", Toast.LENGTH_LONG).show();
-                }
-                else{
-                    Toast.makeText(getApplicationContext(),  "Incorrect email address" , Toast.LENGTH_LONG).show();
-                }
+                displayResponse(content);
             }
         });
+    }
+
+    public void displayResponse(String response) {
+        try {
+            JSONObject obj = new JSONObject(response);
+            if(obj.getBoolean("error") == false){
+                Toast.makeText(getApplicationContext(), obj.getString("message"), Toast.LENGTH_LONG).show();
+                navigatetoLoginActivity();
+            }
+            else{
+                Toast.makeText(getApplicationContext(), obj.getString("message"), Toast.LENGTH_LONG).show();
+            }
+        } catch (JSONException e) {
+            Toast.makeText(getApplicationContext(), "Error: " + e, Toast.LENGTH_LONG).show();
+            e.printStackTrace();
+        }
     }
 
     /**

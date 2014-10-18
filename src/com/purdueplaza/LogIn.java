@@ -58,7 +58,9 @@ public class LogIn extends Activity {
 
     public void submit(View view) {
         String email = username.getText().toString();
+        if(email == null) email = "";
         String pass = password.getText().toString();
+        if(pass == null) pass = "";
         RequestParams params = new RequestParams();
         /*  We don't need to check if parameters are correct, they are checked on the server side.  */
         params.put("email", email);
@@ -71,43 +73,38 @@ public class LogIn extends Activity {
         client.post("http://167.88.118.116/login",params ,new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(String response) {
-                try {
-                    JSONObject obj = new JSONObject(response);
-                    //how to access the obj's api code and store in memory so user can stay logged in?
-
-                    if(obj.getBoolean("error") == false){
-                        Toast.makeText(getApplicationContext(), obj.getString("message"), Toast.LENGTH_LONG).show();
-
-                        /*  Store the new found key in storage for future use.  */
-                        SharedPreferences settings = getSharedPreferences("Login", Context.MODE_PRIVATE);
-                        SharedPreferences.Editor editor = settings.edit();
-                        editor.putString("key", obj.getString("apiKey"));
-                        editor.commit();
-
-                        navigateToMainActivity();
-                    }
-                    else{
-                        Toast.makeText(getApplicationContext(), obj.getString("message"), Toast.LENGTH_LONG).show();
-                    }
-                } catch (JSONException e) {
-                    Toast.makeText(getApplicationContext(), "Error: " + e, Toast.LENGTH_LONG).show();
-                    e.printStackTrace();
-                }
+                displayResponse(response);
             }
             // When the response returned by REST has Http response code other than '200'
             @Override
             public void onFailure(int statusCode, Throwable error, String content) {
-                if(statusCode == 404){
-                    Toast.makeText(getApplicationContext(), "Error 404: Requested resource not found.", Toast.LENGTH_LONG).show();
-                }
-                else if(statusCode == 500){
-                    Toast.makeText(getApplicationContext(), "Error 500: Something went wrong at server end.", Toast.LENGTH_LONG).show();
-                }
-                else{
-                    Toast.makeText(getApplicationContext(), "Error " + statusCode, Toast.LENGTH_LONG).show();
-                }
+                displayResponse(content);
             }
         });
+    }
+
+    public void displayResponse(String response) {
+        try {
+            JSONObject obj = new JSONObject(response);
+
+            if(obj.getBoolean("error") == false){
+                Toast.makeText(getApplicationContext(), obj.getString("message"), Toast.LENGTH_LONG).show();
+
+                        /*  Store the new found key in storage for future use.  */
+                SharedPreferences settings = getSharedPreferences("Login", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = settings.edit();
+                editor.putString("key", obj.getString("apiKey"));
+                editor.commit();
+
+                navigateToMainActivity();
+            }
+            else{
+                Toast.makeText(getApplicationContext(), obj.getString("message"), Toast.LENGTH_LONG).show();
+            }
+        } catch (JSONException e) {
+            Toast.makeText(getApplicationContext(), "Error: " + e, Toast.LENGTH_LONG).show();
+            e.printStackTrace();
+        }
     }
 
     public void navigateToMainActivity(){
