@@ -23,7 +23,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="68d47934-ce70-48f8-803a-d019e0cb368c" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/register.xml" afterPath="$PROJECT_DIR$/res/layout/register.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="BoilerMake2014Android.iws" />
@@ -731,7 +730,7 @@
       <workItem from="1413608456880" duration="2000" />
       <workItem from="1413608462190" duration="34991000" />
       <workItem from="1413674475482" duration="410000" />
-      <workItem from="1413674892456" duration="743000" />
+      <workItem from="1413674892456" duration="751000" />
     </task>
     <task id="LOCAL-00001" summary="Made a main page and log in page for the android app">
       <created>1413615940462</created>
@@ -765,11 +764,15 @@
       <created>1413675185190</created>
       <updated>1413675185190</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="changed email field on register to email address">
+      <created>1413675860357</created>
+      <updated>1413675860357</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="36146000" />
+    <option name="totallyTimeSpent" value="36154000" />
   </component>
   <component name="TodoView" selected-index="4">
     <todo-panel id="selected-file">
