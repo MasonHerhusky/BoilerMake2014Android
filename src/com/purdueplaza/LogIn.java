@@ -58,9 +58,7 @@ public class LogIn extends Activity {
 
     public void submit(View view) {
         String email = username.getText().toString();
-        if(email == null) email = "";
         String pass = password.getText().toString();
-        if(pass == null) pass = "";
         RequestParams params = new RequestParams();
         /*  We don't need to check if parameters are correct, they are checked on the server side.  */
         params.put("email", email);
@@ -75,7 +73,6 @@ public class LogIn extends Activity {
             public void onSuccess(String response) {
                 displayResponse(response);
             }
-            // When the response returned by REST has Http response code other than '200'
             @Override
             public void onFailure(int statusCode, Throwable error, String content) {
                 displayResponse(content);
@@ -90,7 +87,7 @@ public class LogIn extends Activity {
             if(obj.getBoolean("error") == false){
                 Toast.makeText(getApplicationContext(), obj.getString("message"), Toast.LENGTH_LONG).show();
 
-                        /*  Store the new found key in storage for future use.  */
+                /*  Store the new found key in storage for future use.  */
                 SharedPreferences settings = getSharedPreferences("Login", Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = settings.edit();
                 editor.putString("key", obj.getString("apiKey"));
