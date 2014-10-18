@@ -69,9 +69,9 @@
             <Button
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:text="RSVP Event"
+                    android:text="Attend Event"
                     android:gravity="center"
-                    android:id="@+id/rsvp_button"/>
+                    android:id="@+id/attend_button"/>
         </LinearLayout>
     </ScrollView>
 
