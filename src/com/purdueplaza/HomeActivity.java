@@ -44,6 +44,7 @@ public class HomeActivity extends Activity{
                 try {
                     JSONObject obj = new JSONObject(response);
                     if (obj.getBoolean("error") == false) {
+                        Toast.makeText(getApplicationContext(), obj.getString("message"), Toast.LENGTH_LONG).show();
                         JSONArray events = obj.getJSONArray("events");
                         for(int i = 0; i < events.length(); i++) {
                             JSONObject c = events.getJSONObject(i);
@@ -55,7 +56,7 @@ public class HomeActivity extends Activity{
                             descriptions.add(description);
                         }
                     } else {
-                        Toast.makeText(getApplicationContext(), response, Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), obj.getString("message"), Toast.LENGTH_LONG).show();
                     }
                 } catch (JSONException e) {
                     Toast.makeText(getApplicationContext(), "Error: " + e, Toast.LENGTH_LONG).show();
@@ -77,8 +78,8 @@ public class HomeActivity extends Activity{
             }
         });
 
-        ArrayAdapter<String> adapter = new Adapter(this, android.R.layout.simple_list_item_1, names);
-        list.setAdapter(adapter);
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, names);
+        list.setAdapter(arrayAdapter);
 
         list.setOnItemClickListener(new OnItemClickListener() {
             @Override
@@ -106,8 +107,6 @@ public class HomeActivity extends Activity{
             }
 
         });
-    }
-    public void addListenerOnButton() {
 
         search_button = (Button) findViewById(R.id.search_button);
 
@@ -123,13 +122,13 @@ public class HomeActivity extends Activity{
         });
     }
 
-    public void register(){
-        Intent registerIntent = new Intent(getApplicationContext(),RegisterEvent.class);
+    public void register(View view){
+        Intent registerIntent = new Intent(getApplicationContext(),Register.class);
         startActivity(registerIntent);
     }
 
 
-    public void searchEvents() {
+    public void searchEvents(View view) {
 
     }
 
