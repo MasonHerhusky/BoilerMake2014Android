@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:background="@drawable/blueglow"
+              android:layout_height="match_parent" android:weightSum="1">
+
+    <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Purdue Plaza"
+            android:textColor="#ff545454"
+            android:textSize="40dp"
+            android:id="@+id/textView"
+            android:gravity="center"
+            />
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                  android:orientation="horizontal"
+                  android:gravity="center"
+                  android:layout_width="fill_parent"
+                  android:layout_height="wrap_content" android:weightSum="1">
+
+        <EditText
+                android:layout_width="300dp"
+                android:gravity="center"
+                android:layout_height="fill_parent"
+                android:id="@+id/editText"/>
+        <Space
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="0.07"
+                android:gravity="center"
+                />
+
+        <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Search"
+                android:onClick="searchEvents"
+                android:id="@+id/register_button"/>
+        android:gravity="center"
+    </LinearLayout>
+
+    <Button
+            android:layout_width="160dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:text="Register New Event"
+            android:textSize="15dp"
+            />
+
+    <ListView
+            android:layout_width="match_parent"
+            android:layout_height="412dp"
+            android:id="@+id/listView"
+            android:choiceMode="none"/>
+
+</LinearLayout>

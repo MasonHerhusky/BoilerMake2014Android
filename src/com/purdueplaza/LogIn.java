@@ -74,6 +74,8 @@ public class LogIn extends Activity {
             public void onSuccess(String response) {
                 try {
                     JSONObject obj = new JSONObject(response);
+                    //how to access the obj's api code and store in memory so user can stay logged in?
+
                     if(obj.getBoolean("error") == false){
                         Toast.makeText(getApplicationContext(), "You are successfully logged in!", Toast.LENGTH_LONG).show();
                         navigateToHomeActivity();

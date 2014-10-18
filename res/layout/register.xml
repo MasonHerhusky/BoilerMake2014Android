@@ -12,13 +12,12 @@
             android:layout_height="wrap_content"
             android:text="Register Account"
             android:textSize="50dp"
-            android:textColor="#ff484848"
+            android:textColor="#ff616163"
             android:id="@+id/textView"/>
     <Space android:layout_width="fill_parent" android:layout_height="50dp"/>
     <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="#ff484848"
             android:text="Email"
             android:textSize="20dp"
             android:id="@+id/textView2" android:layout_gravity="center_horizontal"/>
@@ -31,7 +30,6 @@
     <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="#ff484848"
             android:text="Full Name"
             android:textSize="20dp"
             android:id="@+id/name" android:layout_gravity="center_horizontal"/>
@@ -45,7 +43,6 @@
     <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="#ff484848"
             android:text="Password"
             android:textSize="20dp"
             android:id="@+id/password" android:layout_gravity="center_horizontal"/>

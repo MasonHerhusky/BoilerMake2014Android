@@ -36,6 +36,7 @@
             android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:text=""
+            android:inputType="textEmailAddress"
             />
     <TextView
             android:layout_width="wrap_content"
