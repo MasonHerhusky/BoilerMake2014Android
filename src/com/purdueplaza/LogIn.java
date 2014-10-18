@@ -1,5 +1,7 @@
 package com.purdueplaza;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -78,7 +80,14 @@ public class LogIn extends Activity {
 
                     if(obj.getBoolean("error") == false){
                         Toast.makeText(getApplicationContext(), "You are successfully logged in!", Toast.LENGTH_LONG).show();
-                        navigateToHomeActivity();
+
+                        /*  Store the new found key in storage for future use.  */
+                        SharedPreferences settings = getSharedPreferences("Login", Context.MODE_PRIVATE);
+                        SharedPreferences.Editor editor = settings.edit();
+                        editor.putString("key", obj.getString("apiKey"));
+                        editor.commit();
+
+                        navigateToMainActivity();
                     }
                     else{
                         Toast.makeText(getApplicationContext(), "Incorrect email or password", Toast.LENGTH_LONG).show();
@@ -104,9 +113,9 @@ public class LogIn extends Activity {
         });
     }
 
-    public void navigateToHomeActivity(){
-        Intent homeIntent = new Intent(getApplicationContext(),HomeActivity.class);
-        startActivity(homeIntent);
+    public void navigateToMainActivity(){
+        Intent mainIntent = new Intent(getApplicationContext(),MyActivity.class);
+        startActivity(mainIntent);
     }
 
 }
