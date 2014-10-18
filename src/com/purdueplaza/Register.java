@@ -34,20 +34,15 @@ public class Register extends Activity {
         password = (EditText) findViewById(R.id.password_field);
         email = (EditText) findViewById(R.id.email_field);
         addListenerOnButton();
-
     }
 
     public void addListenerOnButton() {
-
-
         register_button = (Button) findViewById(R.id.register_button);
         register_button.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
-
                 submit(v);
-
             }
 
         });

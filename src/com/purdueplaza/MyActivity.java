@@ -27,7 +27,6 @@ public class MyActivity extends Activity {
             startActivity(homeIntent);
         }
 
-
         super.onCreate(savedInstanceState);
         getActionBar().hide();
         setContentView(R.layout.main);
