@@ -23,6 +23,7 @@
             android:id="@+id/textView2" android:layout_gravity="center_horizontal"/>
     <EditText
             android:layout_width="306dp"
+            android:inputType="textEmailAddress"
             android:layout_height="wrap_content"
             android:id="@+id/email_field" android:layout_gravity="center_horizontal"/>
 

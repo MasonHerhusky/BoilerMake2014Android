@@ -36,7 +36,7 @@ public class HomeActivity extends Activity{
         list = (ListView) findViewById(R.id.listView);
 
         RequestParams params = new RequestParams();
-        params.put("page", 1);
+        params.put("page", 0);
         AsyncHttpClient client = new AsyncHttpClient();
         client.get("http://167.88.118.116/events", params, new AsyncHttpResponseHandler() {
             @Override
@@ -61,7 +61,6 @@ public class HomeActivity extends Activity{
                 } catch (JSONException e) {
                     Toast.makeText(getApplicationContext(), "Error: " + e, Toast.LENGTH_LONG).show();
                     e.printStackTrace();
-
                 }
             }
 
