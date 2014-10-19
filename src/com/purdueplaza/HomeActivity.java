@@ -24,9 +24,7 @@ import org.json.JSONObject;
 
 public class HomeActivity extends Activity{
 
-    private ListView eventList;
     private Button register_event_button;
-    private Button search_button;
 
     ArrayList<String> event_id_array = new ArrayList<String>();
     ArrayList<String> name_array = new ArrayList<String>();
@@ -38,22 +36,29 @@ public class HomeActivity extends Activity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home);
         addListenerOnButton();
+        name_array = new ArrayList<String>();
+        desc_array = new ArrayList<String>();
         /*  Fetch Event Data    */
-        RequestParams params = new RequestParams();
-        params.put("page", 0);
-        invokeWS(params);
+        invokeWS(0);
         list = (ListView) findViewById(R.id.listView);
+        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                clickedEvent(event_id_array.get(position));
+            }
+        });
     }
 
-    public void invokeWS(RequestParams params) {
-        if(list != null) list.setAdapter(null);
+
+    public void invokeWS(int page) {
         AsyncHttpClient client = new AsyncHttpClient();
 
         /*  Load API key from prefs.    */
         SharedPreferences settings = getSharedPreferences("Login", Context.MODE_PRIVATE);
         String key = settings.getString("key", "");
         client.addHeader("Authorization", key);
-        client.get("http://167.88.118.116/events", params, new AsyncHttpResponseHandler() {
+
+        client.get("http://167.88.118.116/events?page="+page, null, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(String response) {
                 displayResponse(response);
@@ -73,8 +78,6 @@ public class HomeActivity extends Activity{
             JSONObject obj = new JSONObject(response);
             JSONArray events = obj.getJSONArray("events");
             if(obj.getBoolean("error") == false){
-                name_array = new ArrayList<String>();
-                desc_array = new ArrayList<String>();
                 for (int i = 0, count = events.length(); i < count; i++) {
                     try {
                         event_id_array.add(events.getJSONObject(i).getString("_id"));
@@ -87,19 +90,13 @@ public class HomeActivity extends Activity{
 
                 ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
                         android.R.layout.simple_list_item_1, android.R.id.text1, name_array);
-
+                adapter.notifyDataSetChanged();
                 list.setAdapter(adapter);
-                list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        clickedEvent(event_id_array.get(position));
-                    }
-                });
+
             } else {
-                Toast.makeText(getApplicationContext(), obj.getString("message"), Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "You've hit the bottom!", Toast.LENGTH_LONG).show();
             }
         } catch (JSONException e) {
-            Toast.makeText(getApplicationContext(), "Error: " + e, Toast.LENGTH_LONG).show();
             e.printStackTrace();
         }
     }
@@ -163,5 +160,4 @@ public class HomeActivity extends Activity{
                 return super.onOptionsItemSelected(item);
         }
     }
-
 }
