@@ -75,7 +75,8 @@ public class HomeActivity extends Activity{
             if(obj.getBoolean("error") == false){
                 Toast.makeText(getApplicationContext(), obj.getString("message"), Toast.LENGTH_LONG).show();
                 JSONArray events = obj.getJSONArray("events");
-                System.out.println(events);
+                for(int i = 0; i < events.length(); i++)
+                    System.out.println("EVENT #" + i + ": " + events.get(i));
                 //Populate list
             }
             else{
