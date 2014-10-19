@@ -29,7 +29,7 @@ public class RegisterEvent extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getActionBar().hide();
-        setContentView(R.layout.registerEvent);
+        setContentView(R.layout.register_event);
         name = (EditText) findViewById(R.id.name_field);
         desc = (EditText) findViewById(R.id.description_field);
         start = (EditText) findViewById(R.id.startTime_field);
