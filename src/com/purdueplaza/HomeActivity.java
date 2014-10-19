@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.*;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
@@ -24,9 +25,7 @@ public class HomeActivity extends Activity{
 
     private ListView eventList;
     private Button register_event_button;
-    private Button search_button;
 
-    ArrayList<String> event_id_array = new ArrayList<String>();
     ArrayList<String> name_array = new ArrayList<String>();
     ArrayList<String> desc_array = new ArrayList<String>();
     ListView list;
@@ -58,7 +57,7 @@ public class HomeActivity extends Activity{
             @Override
             public void onFailure(int statusCode, Throwable error, String content) {
                 if(content == null)
-                    Toast.makeText(getApplicationContext(), "Something has gone very wrong! Please check your internet connection!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "Check your internet connection!", Toast.LENGTH_LONG).show();
                 else
                     displayResponse(content);
             }
@@ -70,28 +69,29 @@ public class HomeActivity extends Activity{
             JSONObject obj = new JSONObject(response);
             JSONArray events = obj.getJSONArray("events");
             if(obj.getBoolean("error") == false){
+                Toast.makeText(getApplicationContext(), obj.getString("message"), Toast.LENGTH_LONG).show();
+
                 name_array = new ArrayList<String>();
                 desc_array = new ArrayList<String>();
                 for (int i = 0, count = events.length(); i < count; i++) {
                     try {
-                        event_id_array.add(events.getJSONObject(i).getString("_id"));
                         name_array.add(events.getJSONObject(i).getString("name"));
                         desc_array.add(events.getJSONObject(i).getString("desc"));
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
                 }
+                System.out.println(obj.toString());
+                System.out.println(name_array.toString());
+                System.out.println(desc_array.toString());
 
-                ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-                        android.R.layout.simple_list_item_1, android.R.id.text1, name_array);
+                String[][] values = new String[2][];
+                values[0] = (String[]) name_array.toArray();
+                values[1] = (String[]) desc_array.toArray();
+                int[] types = new int[]{android.R.id.text1, android.R.id.text2};
 
-                list.setAdapter(adapter);
-                list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        clickedEvent(event_id_array.get(position));
-                    }
-                });
+             //   ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_2, values, types);
+             //   list.setAdapter(adapter);
             } else {
                 Toast.makeText(getApplicationContext(), obj.getString("message"), Toast.LENGTH_LONG).show();
             }
@@ -102,26 +102,35 @@ public class HomeActivity extends Activity{
     }
 
     public void addListenerOnButton() {
+
         register_event_button = (Button) findViewById(R.id.register_button);
+
         register_event_button.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
-                register(v);
+
+                registerEvent(v);
+
             }
+
         });
     }
 
-    public void register(View view){
+    public void registerEvent(View view){
         Intent registerIntent = new Intent(getApplicationContext(),RegisterEvent.class);
         startActivity(registerIntent);
     }
 
-    public void clickedEvent(String id) {
-        String newId = id.substring(8);
-        newId = newId.substring(0, newId.length() - 2);
+
+    public void searchEvents(View view) {
+
+    }
+
+    public void clickedEvent(long id) {
         Intent eventIntent = new Intent(getApplicationContext(),EventActivity.class);
-        eventIntent.putExtra("event_id",newId);
         startActivity(eventIntent);
+        //TODO store event ID in intent to send it to Event activity
     }
 
     @Override

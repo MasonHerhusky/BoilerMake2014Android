@@ -27,9 +27,15 @@
 
     <ListView
             android:layout_width="match_parent"
-            android:layout_height="412dp"
+            android:layout_height="380dp"
             android:id="@+id/listView"
             android:choiceMode="none"
             />
+    <Button
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:text="Next Page"
+            android:textSize="15dp"
+            android:layout_gravity="right"/>
 
 </LinearLayout>
