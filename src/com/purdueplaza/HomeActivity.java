@@ -146,8 +146,8 @@ public class HomeActivity extends Activity{
     */
 
     public void clickedEvent(long id) {
-        Intent registerIntent = new Intent(getApplicationContext(),Event.class);
-        startActivity(registerIntent);
+        Intent eventIntent = new Intent(getApplicationContext(),Event.class);
+        startActivity(eventIntent);
         //TODO store event ID in intent to send it to Event activity
     }
 
