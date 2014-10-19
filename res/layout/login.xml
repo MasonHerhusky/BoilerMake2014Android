@@ -3,7 +3,7 @@
               android:orientation="vertical"
               android:layout_width="fill_parent"
               android:layout_height="fill_parent"
-              android:background="@drawable/blueglow"
+              android:background="@drawable/blurrycity"
         >
     <TextView
             android:textSize="125dp"
@@ -15,16 +15,17 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Please Enter Your Login Details"
-            android:textColor="#ff484848"
+            android:textColor="#ff616163"
             android:layout_gravity="center"
             />
     <TextView
-            android:textSize="75dp"
+            android:textSize="100dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             />
     <TextView
             android:layout_width="wrap_content"
+
             android:layout_height="wrap_content"
             android:text="Email"
             android:layout_gravity="center"
@@ -62,6 +63,6 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="Submit"
-            android:textColor="#ff50c6d1"
+            android:textColor="#ff7dadd5"
             />
 </LinearLayout>

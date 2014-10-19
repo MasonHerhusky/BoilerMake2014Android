@@ -3,14 +3,14 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="vertical"
               android:layout_width="match_parent"
-              android:background="@drawable/blueglow"
+              android:background="@drawable/blurrycity"
               android:layout_height="match_parent" android:weightSum="1">
 
     <TextView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="Purdue Plaza"
-            android:textColor="#ff545454"
+            android:text="Event Listing"
+            android:textColor="#ff616163"
             android:textSize="40dp"
             android:id="@+id/textView"
             android:gravity="center"
@@ -21,6 +21,7 @@
             android:layout_height="40dp"
             android:layout_gravity="center"
             android:text="Register New Event"
+            android:textColor="#ffaac7d1"
             android:textSize="15dp"
             android:id="@+id/register_button"
             />
@@ -35,6 +36,7 @@
             android:layout_width="100dp"
             android:layout_height="40dp"
             android:text="Next Page"
+            android:textColor="#ff7dadd5"
             android:textSize="15dp"
             android:layout_gravity="right"/>
 

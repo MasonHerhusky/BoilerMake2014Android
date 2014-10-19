@@ -4,7 +4,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="vertical"
               android:layout_width="match_parent"
-              android:background="@drawable/blueglow"
+              android:background="@drawable/blurrycity"
               android:layout_height="match_parent">
 
 
@@ -18,31 +18,34 @@
         <LinearLayout android:layout_width="wrap_content"
                       android:layout_height="wrap_content"
                       android:orientation="vertical">
+
+            <Space android:layout_width="20dp" android:layout_height="25dp"/>
+
             <TextView
                     android:layout_width="wrap_content"
-                    android:textColor="#ff484848"
                     android:layout_height="wrap_content"
-                    android:text="Loading..."
+                    android:textColor="#ffffff"
+                    android:text="Event Title"
                     android:id="@+id/eventTitle"
                     android:gravity="center"
                     android:textSize="50dp"
                     />
 
-            <Space android:layout_width="20dp" android:layout_height="15dp"/>
+            <Space android:layout_width="20dp" android:layout_height="25dp"/>
 
             <TextView
                     android:layout_width="350dp"
                     android:layout_height="wrap_content"
-                    android:text=""
+                    android:text="August 25th"
                     android:id="@+id/startTime"
-                    android:textColor="#ff545454"
+                    android:textColor="#ff616163"
                     android:textSize="30dp"
                     />
             <TextView
                     android:layout_width="350dp"
                     android:layout_height="wrap_content"
-                    android:text=""
-                    android:textColor="#ff545454"
+                    android:text="August 25th"
+                    android:textColor="#ff616163"
                     android:id="@+id/endTime"
                     android:textSize="30dp"
                     />
@@ -55,7 +58,8 @@
             <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text=""
+                    android:textColor="#ffffff"
+                    android:text="Description of the event being hosted with lots of words and descriptive adjectives and other things to be include within the description of said event. There could possibly be photos beneath this text which would looks great."
                     android:id="@+id/eventDescription"
                     android:textSize="20dp"
                     />
@@ -64,7 +68,7 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:text="Attend Event"
-                    android:textColor="#ff50c6d1"
+                    android:textColor="#ff7dadd5"
                     android:gravity="center"
                     android:id="@+id/attend_button"/>
         </LinearLayout>
