@@ -2,8 +2,9 @@
 <resources>
     <string name="app_name">Plaza</string>
     <string name="register_account"></string>
-    <string name="register_event">Register an Event</string>
+    <string name="register_event"></string>
     <string name="login">Login</string>
     <string name="logout">Logout</string>
     <string name="event_view">Event Details:</string>
+    <string name="event_edit"></string>
 </resources>
