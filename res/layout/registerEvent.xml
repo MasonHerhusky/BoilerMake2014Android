@@ -10,17 +10,19 @@
             android:layout_width="wrap_content"
             android:gravity="center"
             android:layout_height="wrap_content"
-            android:text="Register Account"
+            android:text="Register Event"
+            android:layout_gravity="center"
             android:textSize="50dp"
             android:textColor="#ff616163"
-            android:id="@+id/textView"/>
-    <Space android:layout_width="fill_parent" android:layout_height="50dp"/>
+            android:id="@+id/registerEvent"/>
+    <Space android:layout_width="fill_parent" android:layout_height="30dp"/>
     <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Email"
+            android:text="Event Name"
             android:textSize="20dp"
-            android:id="@+id/textView2" android:layout_gravity="center_horizontal"/>
+            android:id="@+id/eventName"
+            android:layout_gravity="center_horizontal"/>
     <EditText
             android:layout_width="306dp"
             android:inputType="textEmailAddress"
@@ -31,29 +33,46 @@
     <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Full Name"
+            android:text="Event Description"
             android:textSize="20dp"
             android:id="@+id/name" android:layout_gravity="center_horizontal"/>
 
     <EditText
             android:layout_width="194dp"
-            android:layout_height="wrap_content"
-            android:id="@+id/name_field" android:layout_gravity="center_horizontal"/>
+            android:layout_height="100dp"
+            android:id="@+id/description_field" android:layout_gravity="center_horizontal"/>
 
 
     <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:inputType="textPersonName"
-            android:text="Password"
+            android:text="Start Date and Time"
             android:textSize="20dp"
-            android:id="@+id/password" android:layout_gravity="center_horizontal"/>
+            android:id="@+id/startTime"
+            android:layout_gravity="center"/>
     <EditText
             android:layout_width="249dp"
             android:layout_height="wrap_content"
-            android:inputType="textPassword"
+            android:inputType="datetime"
             android:ems="10"
-            android:id="@+id/password_field" android:layout_gravity="center_horizontal"/>
+            android:id="@+id/startTime_field"
+            android:layout_gravity="center_horizontal"/>
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:text="End Date and Time"
+            android:textSize="20dp"
+            android:id="@+id/endTime"
+            android:layout_gravity="center"/>
+    <EditText
+            android:layout_width="249dp"
+            android:layout_height="wrap_content"
+            android:inputType="datetime"
+            android:ems="10"
+            android:id="@+id/endTime_field"
+            android:layout_gravity="center_horizontal"/>
     <Space
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

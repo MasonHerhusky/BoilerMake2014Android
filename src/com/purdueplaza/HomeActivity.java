@@ -8,6 +8,8 @@ import android.widget.*;
 import android.view.View;
 import android.app.ListActivity;
 import android.widget.AdapterView.OnItemClickListener;
+import java.lang.CharSequence;
+
 
 import java.util.ArrayList;
 
@@ -116,14 +118,32 @@ public class HomeActivity extends Activity{
     }
 
     public void register(View view){
-        Intent registerIntent = new Intent(getApplicationContext(),Register.class);
+        Intent registerIntent = new Intent(getApplicationContext(),RegisterEvent.class);
         startActivity(registerIntent);
     }
+/* supposedly this is how to search
+    EditText inputSearch;
+    inputSearch = (EditText) findViewById(R.id.search_field);
+    inputSearch.addTextChangedListener(new TextWatcher() {
+        @Override
+        public void onTextChanged(CharSequence cs, int arg1, int arg2, int arg3) {
+            // When user changed the Text
+            HomeActivity.this.adapter.getFilter().filter(cs);
+        }
 
+        @Override
+        public void beforeTextChanged(CharSequence arg0, int arg1, int arg2,
+        int arg3) {
+            // TODO Auto-generated method stub
 
-    public void searchEvents(View view) {
+        }
 
+        @Override
+        public void afterTextChanged(Editable arg0) {
+            // TODO Auto-generated method stub
+        }
     }
+    */
 
     public void clickedEvent(long id) {
         Intent registerIntent = new Intent(getApplicationContext(),Event.class);
