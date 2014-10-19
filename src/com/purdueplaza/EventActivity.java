@@ -42,6 +42,14 @@ public class EventActivity extends Activity{
                 unattend();
             }
         });
+        Button all_attend_button = (Button) findViewById(R.id.all_attending_button);
+        all_attend_button.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent userIntent = new Intent(getApplicationContext(),EventAttendance.class);
+                userIntent.putExtra("event_id", event_id);
+                startActivity(userIntent);
+            }
+        });
     }
 
     public void attend() {
@@ -95,6 +103,10 @@ public class EventActivity extends Activity{
                 start.setText(obj.getString("start"));
                 TextView end = (TextView) findViewById(R.id.endTime);
                 end.setText(obj.getString("end"));
+                TextView attendance_text = (TextView) findViewById(R.id.all_attending_text);
+                attendance_text.setText(obj.getInt("numAttending") + " in attendance.");
+                Button attendance = (Button) findViewById(R.id.all_attending_button);
+                attendance.setVisibility(View.VISIBLE);
                 if(isOwner) {
                     //Don't show any buttons.
                 }else if(obj.getBoolean("attending")) {
@@ -266,6 +278,12 @@ public class EventActivity extends Activity{
             e.printStackTrace();
 
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent eventIntent = new Intent(getApplicationContext(),HomeActivity.class);
+        startActivity(eventIntent);
     }
 
 

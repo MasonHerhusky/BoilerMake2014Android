@@ -37,5 +37,9 @@
                   android:label="@string/event_edit"
                   android:parentActivityName="com.purdueplaza.HomeActivity">
         </activity>
+        <activity android:name="EventAttendance"
+                  android:label="@string/event_attendance"
+                  android:parentActivityName="com.purdueplaza.HomeActivity">
+        </activity>
     </application>
 </manifest>

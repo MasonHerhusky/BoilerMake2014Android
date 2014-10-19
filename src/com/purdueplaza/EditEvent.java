@@ -32,7 +32,6 @@ public class EditEvent extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         event_id = getIntent().getStringExtra("event_id");
-        Toast.makeText(getApplicationContext(), "event id: " + event_id, Toast.LENGTH_LONG).show();
         setContentView(R.layout.edit_event);
         name = (EditText) findViewById(R.id.name_field);
         desc = (EditText) findViewById(R.id.description_field);
@@ -103,7 +102,9 @@ public class EditEvent extends Activity {
             JSONObject obj = new JSONObject(response);
             if(obj.getBoolean("error") == false){
                 Toast.makeText(getApplicationContext(), obj.getString("message"), Toast.LENGTH_LONG).show();
-                navigatetoHomeActivity();
+                Intent eventIntent = new Intent(getApplicationContext(),EventActivity.class);
+                eventIntent.putExtra("event_id", event_id);
+                startActivity(eventIntent);
             }
             else{
                 Toast.makeText(getApplicationContext(), obj.getString("message"), Toast.LENGTH_LONG).show();
@@ -114,17 +115,9 @@ public class EditEvent extends Activity {
         }
     }
 
-    /**
-     * Method which navigates from Register Activity to Login Activity
-     */
-    public void navigatetoHomeActivity(){
-        Intent homeIntent = new Intent(getApplicationContext(),HomeActivity.class);
-        startActivity(homeIntent);
-    }
-
     @Override
     public void onBackPressed() {
-        Intent eventIntent = new Intent(getApplicationContext(),HomeActivity.class);
+        Intent eventIntent = new Intent(getApplicationContext(),EventActivity.class);
         eventIntent.putExtra("event_id", event_id);
         startActivity(eventIntent);
     }
