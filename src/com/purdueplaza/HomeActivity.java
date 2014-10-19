@@ -133,5 +133,9 @@ public class HomeActivity extends Activity{
         //TODO store event ID in intent to send it to Event activity
     }
 
+    @Override
+    public void onBackPressed() {
+        moveTaskToBack(true);  //On back button press on this page, close the app.
+    }
 
 }
