@@ -28,5 +28,9 @@
                   android:label="@string/register_event"
                   android:parentActivityName="com.purdueplaza.HomeActivity">
         </activity>
+        <activity android:name="EventActivity"
+                  android:label="@string/event_view"
+                  android:parentActivityName="com.purdueplaza.EventActivity">
+        </activity>
     </application>
 </manifest>

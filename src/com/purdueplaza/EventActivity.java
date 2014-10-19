@@ -12,12 +12,10 @@ import com.loopj.android.http.RequestParams;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-/**
- * Created by masonherhusky on 10/18/14.
- */
-public class Event extends Activity{
+public class EventActivity extends Activity{
 
-    public void onCreate(Bundle savedInstanceState) {
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getActionBar().hide();
         setContentView(R.layout.event);

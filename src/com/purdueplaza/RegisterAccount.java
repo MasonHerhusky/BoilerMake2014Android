@@ -49,8 +49,6 @@ public class RegisterAccount extends Activity {
         });
     }
 
-    private View storedView;
-
     /**
      * Method gets triggered when Register button is clicked
      *
@@ -65,7 +63,6 @@ public class RegisterAccount extends Activity {
         params.put("name", nme);
         params.put("email", eml);
         params.put("password", psswrd);
-        storedView = view;
         invokeWS(params);
     }
 
