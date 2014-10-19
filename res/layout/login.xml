@@ -22,7 +22,7 @@
             android:layout_width="wrap_content"
             android:layout_height="100dp"
             />
-    <TextView
+    <Space
             android:layout_width="wrap_content"
 
             android:layout_height="wrap_content"
@@ -35,21 +35,27 @@
             android:layout_gravity="center_horizontal|bottom"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
+            android:hint="email"
+            android:background="#50ffffff"
+            android:minHeight="40dp"
             android:text=""
             android:inputType="textEmailAddress"
             />
-    <TextView
+    <Space
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="10dp"
             android:text="Password"
             android:layout_gravity="center"
-            android:textSize="20dp"
             />
     <EditText
             android:id="@+id/password"
             android:layout_width="300dp"
+            android:background="#50ffffff"
+            android:minHeight="40dp"
             android:layout_gravity="center_horizontal|bottom"
             android:layout_height="wrap_content"
+
+            android:hint="password"
             android:text=""
             android:inputType="textWebPassword"
             />
