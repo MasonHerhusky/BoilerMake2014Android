@@ -59,7 +59,6 @@
     <EditText
             android:layout_width="250dp"
             android:layout_height="wrap_content"
-            android:inputType="datetime"
             android:ems="10"
             android:textColor="#ffffff"
             android:id="@+id/startTime_field"

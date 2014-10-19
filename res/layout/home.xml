@@ -15,6 +15,9 @@
             android:id="@+id/textView"
             android:gravity="center"
             />
+    <Space
+            android:layout_width="wrap_content"
+            android:layout_height="10dp"/>
 
     <Button
             android:layout_width="160dp"
