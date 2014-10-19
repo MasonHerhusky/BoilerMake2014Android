@@ -16,7 +16,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Purdue Plaza"
-            android:textColor="#ff464c63"
+            android:textColor="#ff1b2f63"
             android:textStyle="bold"
             />
     <TextView
