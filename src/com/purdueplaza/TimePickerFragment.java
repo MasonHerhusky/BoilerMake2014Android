@@ -33,10 +33,17 @@ public class TimePickerFragment extends DialogFragment
     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
         if(hourOfDay > 12) {
             hourOfDay -= 12;
-            time = hourOfDay + ":" +  minute + " PM";
+            time += ""+ hourOfDay + ":";
+            if (minute == 0)
+                time += "0";
+            time +=  "" + minute + " PM";
         }
-        else
-            time = hourOfDay + ":" +  minute + " AM";
+        else {
+            time += "" + hourOfDay + ":";
+            if (minute == 0)
+                time += "0";
+            time += "" + minute + " AM";
+        }
     }
 
     public String getTime() {
