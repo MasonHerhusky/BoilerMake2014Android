@@ -6,13 +6,18 @@
               android:background="@drawable/blurrycity3"
               android:layout_height="match_parent">
 
+
+
+
     <ScrollView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:id="@+id/scrollView">
 
-    <LinearLayout android:layout_width="match_parent"
+
+    <LinearLayout android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
+                  android:layout_gravity="center"
                   android:orientation="vertical" android:id="@+id/linear">
 
         <Space android:layout_width="20dp" android:layout_height="25dp"/>
@@ -125,5 +130,5 @@
                     android:visibility="invisible"/>
         <Space android:layout_width="fill_parent" android:layout_height="40dp"/>
     </LinearLayout>
-</ScrollView>
+    </ScrollView>
 </LinearLayout>
