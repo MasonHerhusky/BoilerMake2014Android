@@ -1,38 +1,39 @@
-
 package com.purdueplaza;
 
-        import org.json.JSONException;
-        import org.json.JSONObject;
+import org.json.JSONException;
+import org.json.JSONObject;
 
-        import android.app.Activity;
-        import android.content.Intent;
-        import android.os.Bundle;
-        import android.view.View;
-        import android.widget.EditText;
-        import android.widget.Toast;
-        import android.widget.Button;
+import android.app.Activity;
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.Toast;
+import android.widget.Button;
 
-        import com.loopj.android.http.AsyncHttpClient;
-        import com.loopj.android.http.AsyncHttpResponseHandler;
-        import com.loopj.android.http.RequestParams;
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
 /**
  *
  * Register Activity Class
  */
-public class Register extends Activity {
+public class RegisterEvent extends Activity {
 
     private EditText name;
-    private EditText email;
-    private EditText password;
+    private EditText desc;
+    private EditText start;
+    private EditText end;
     private Button register_button;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getActionBar().hide();
-        setContentView(R.layout.register);
+        setContentView(R.layout.registerEvent);
         name = (EditText) findViewById(R.id.name_field);
-        password = (EditText) findViewById(R.id.password_field);
-        email = (EditText) findViewById(R.id.email_field);
+        desc = (EditText) findViewById(R.id.description_field);
+        start = (EditText) findViewById(R.id.startTime_field);
+        end = (EditText) findViewById(R.id.endTime_field);
         addListenerOnButton();
     }
 
@@ -54,14 +55,16 @@ public class Register extends Activity {
      * @param view
      */
     public void submit(View view) {
-        String nme = name.getText().toString();
-        String eml = email.getText().toString();
-        String psswrd = password.getText().toString();
+        String eventName = name.getText().toString();
+        String description = desc.getText().toString();
+        String startTime = start.getText().toString();
+        String endTime = end.getText().toString();
         RequestParams params = new RequestParams();
         /*  We don't need to check if parameters are correct, they are checked on the server side.  */
-        params.put("name", nme);
-        params.put("email", eml);
-        params.put("password", psswrd);
+        params.put("name", eventName);
+        params.put("desc", description);
+        params.put("start", startTime);
+        params.put("end", endTime);
         invokeWS(params);
     }
 
@@ -72,7 +75,7 @@ public class Register extends Activity {
      */
     public void invokeWS(RequestParams params) {
         AsyncHttpClient client = new AsyncHttpClient();
-        client.post("http://167.88.118.116/register",params ,new AsyncHttpResponseHandler() {
+        client.post("http://167.88.118.116/events",params ,new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(String response) {
                 displayResponse(response);
@@ -92,7 +95,7 @@ public class Register extends Activity {
             JSONObject obj = new JSONObject(response);
             if(obj.getBoolean("error") == false){
                 Toast.makeText(getApplicationContext(), obj.getString("message"), Toast.LENGTH_LONG).show();
-                navigatetoLoginActivity();
+                navigatetoHomeActivity();
             }
             else{
                 Toast.makeText(getApplicationContext(), obj.getString("message"), Toast.LENGTH_LONG).show();
@@ -106,9 +109,9 @@ public class Register extends Activity {
     /**
      * Method which navigates from Register Activity to Login Activity
      */
-    public void navigatetoLoginActivity(){
-        Intent loginIntent = new Intent(getApplicationContext(),LogIn.class);
-        startActivity(loginIntent);
+    public void navigatetoHomeActivity(){
+        Intent homeIntent = new Intent(getApplicationContext(),LogIn.class);
+        startActivity(homeIntent);
     }
 
 }
