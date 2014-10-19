@@ -1,15 +1,12 @@
 package com.purdueplaza;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.*;
-import android.view.View;
-import android.app.ListActivity;
-import android.widget.AdapterView.OnItemClickListener;
-import java.lang.CharSequence;
-
 
 import java.util.ArrayList;
 
@@ -20,10 +17,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-
-/**
- * Created by masonherhusky on 10/18/14.
- */
 public class HomeActivity extends Activity{
 
     private ListView list;
@@ -36,46 +29,9 @@ public class HomeActivity extends Activity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         list = (ListView) findViewById(R.id.listView);
-
-        RequestParams params = new RequestParams();
-        params.put("page", 0);
-        AsyncHttpClient client = new AsyncHttpClient();
-        client.get("http://167.88.118.116/events", params, new AsyncHttpResponseHandler() {
-            @Override
-            public void onSuccess(String response) {
-                try {
-                    JSONObject obj = new JSONObject(response);
-                    if (obj.getBoolean("error") == false) {
-                        Toast.makeText(getApplicationContext(), obj.getString("message"), Toast.LENGTH_LONG).show();
-                        JSONArray events = obj.getJSONArray("events");
-                        for(int i = 0; i < events.length(); i++) {
-                            JSONObject c = events.getJSONObject(i);
-                            String name = c.getString("name");
-                            String description = c.getString("desc");
-                            System.out.println ("name" + i + " " + name);
-                            names.add(name);
-                            System.out.println ("description" + i + " " + description);
-                            descriptions.add(description);
-                        }
-                    } else {
-                        Toast.makeText(getApplicationContext(), obj.getString("message"), Toast.LENGTH_LONG).show();
-                    }
-                } catch (JSONException e) {
-                    Toast.makeText(getApplicationContext(), "Error: " + e, Toast.LENGTH_LONG).show();
-                    e.printStackTrace();
-                }
-            }
-
-
-            @Override
-            public void onFailure(int statusCode, Throwable error, String content) {
-                Toast.makeText(getApplicationContext(), "Error " + statusCode + "; " + content, Toast.LENGTH_LONG).show();
-            }
-        });
-
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, names);
+/*
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, null, null);
         list.setAdapter(arrayAdapter);
-
         list.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -83,9 +39,53 @@ public class HomeActivity extends Activity{
                 clickedEvent(id);
             }
         });
+*/
+        /*  Fetch Event Data    */
+        RequestParams params = new RequestParams();
+        params.put("page", 0);
+        invokeWS(params);
+    }
 
+    public void invokeWS(RequestParams params) {
+        AsyncHttpClient client = new AsyncHttpClient();
 
+        /*  Load API key from prefs.    */
+        SharedPreferences settings = getSharedPreferences("Login", Context.MODE_PRIVATE);
+        String key = settings.getString("key", "");
+        client.addHeader("Authorization", key);
 
+        client.get("http://167.88.118.116/events", params, new AsyncHttpResponseHandler() {
+            @Override
+            public void onSuccess(String response) {
+                displayResponse(response);
+            }
+            @Override
+            public void onFailure(int statusCode, Throwable error, String content) {
+                if(content == null)
+                    Toast.makeText(getApplicationContext(), "Something has gone very wrong! Please check your internet connection!", Toast.LENGTH_LONG).show();
+                else
+                    displayResponse(content);
+            }
+        });
+    }
+
+    public void displayResponse(String response) {
+        try {
+            JSONObject obj = new JSONObject(response);
+            if(obj.getBoolean("error") == false){
+                Toast.makeText(getApplicationContext(), obj.getString("message"), Toast.LENGTH_LONG).show();
+                JSONArray events = obj.getJSONArray("events");
+                for(int i = 0; i < events.length(); i++)
+                    System.out.println("EVENT #" + i + ": " + events.get(i));
+                //Populate list
+            }
+            else{
+                Toast.makeText(getApplicationContext(), obj.getString("message"), Toast.LENGTH_LONG).show();
+            }
+        } catch (JSONException e) {
+            Toast.makeText(getApplicationContext(), "Error: " + e, Toast.LENGTH_LONG).show();
+            e.printStackTrace();
+        }
     }
 
     public void addListenerOnButton() {
@@ -121,29 +121,11 @@ public class HomeActivity extends Activity{
         Intent registerIntent = new Intent(getApplicationContext(),RegisterEvent.class);
         startActivity(registerIntent);
     }
-/* supposedly this is how to search
-    EditText inputSearch;
-    inputSearch = (EditText) findViewById(R.id.search_field);
-    inputSearch.addTextChangedListener(new TextWatcher() {
-        @Override
-        public void onTextChanged(CharSequence cs, int arg1, int arg2, int arg3) {
-            // When user changed the Text
-            HomeActivity.this.adapter.getFilter().filter(cs);
-        }
 
-        @Override
-        public void beforeTextChanged(CharSequence arg0, int arg1, int arg2,
-        int arg3) {
-            // TODO Auto-generated method stub
 
-        }
+    public void searchEvents(View view) {
 
-        @Override
-        public void afterTextChanged(Editable arg0) {
-            // TODO Auto-generated method stub
-        }
     }
-    */
 
     public void clickedEvent(long id) {
         Intent eventIntent = new Intent(getApplicationContext(),Event.class);

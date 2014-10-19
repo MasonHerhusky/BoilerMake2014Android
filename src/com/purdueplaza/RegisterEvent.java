@@ -82,7 +82,10 @@ public class RegisterEvent extends Activity {
             }
             @Override
             public void onFailure(int statusCode, Throwable error, String content) {
-                displayResponse(content);
+                if(content == null)
+                    Toast.makeText(getApplicationContext(), "Something has gone very wrong! Please check your internet connection!", Toast.LENGTH_LONG).show();
+                else
+                    displayResponse(content);
             }
         });
     }

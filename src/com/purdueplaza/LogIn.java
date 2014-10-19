@@ -71,11 +71,15 @@ public class LogIn extends Activity {
         client.post("http://167.88.118.116/login",params ,new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(String response) {
-                displayResponse(response);
+                System.out.println("SUCCESS"); displayResponse(response);
             }
             @Override
             public void onFailure(int statusCode, Throwable error, String content) {
-                displayResponse(content);
+                System.out.println("Code: " + statusCode +"; " + content);
+                if(content == null)
+                    Toast.makeText(getApplicationContext(), "Something has gone very wrong! Please check your internet connection!", Toast.LENGTH_LONG).show();
+                else
+                    displayResponse(content);
             }
         });
     }
@@ -83,7 +87,6 @@ public class LogIn extends Activity {
     public void displayResponse(String response) {
         try {
             JSONObject obj = new JSONObject(response);
-
             if(obj.getBoolean("error") == false){
                 Toast.makeText(getApplicationContext(), obj.getString("message"), Toast.LENGTH_LONG).show();
 
@@ -102,6 +105,7 @@ public class LogIn extends Activity {
             Toast.makeText(getApplicationContext(), "Error: " + e, Toast.LENGTH_LONG).show();
             e.printStackTrace();
         }
+
     }
 
     public void navigateToMainActivity(){
