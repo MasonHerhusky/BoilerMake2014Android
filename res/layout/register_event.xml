@@ -37,6 +37,7 @@
             android:layout_height="wrap_content"
             android:text="Event Description"
             android:textSize="20dp"
+            android:inputType="textMultiLine"
             android:textColor="#ffffff"
             android:id="@+id/name" android:layout_gravity="center_horizontal"/>
 
