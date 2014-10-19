@@ -32,7 +32,6 @@ public class LogIn extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getActionBar().hide();
         setContentView(R.layout.login);
         addListenerOnButton();
 

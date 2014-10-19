@@ -28,7 +28,7 @@ public class RegisterAccount extends Activity {
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getActionBar().hide();
+        //getActionBar().hide();
         setContentView(R.layout.register_account);
         name = (EditText) findViewById(R.id.name_field);
         password = (EditText) findViewById(R.id.password_field);
