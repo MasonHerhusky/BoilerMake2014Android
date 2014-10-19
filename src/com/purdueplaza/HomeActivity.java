@@ -4,7 +4,9 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -44,13 +46,13 @@ public class HomeActivity extends Activity{
     }
 
     public void invokeWS(RequestParams params) {
+        if(list != null) list.setAdapter(null);
         AsyncHttpClient client = new AsyncHttpClient();
 
         /*  Load API key from prefs.    */
         SharedPreferences settings = getSharedPreferences("Login", Context.MODE_PRIVATE);
         String key = settings.getString("key", "");
         client.addHeader("Authorization", key);
-
         client.get("http://167.88.118.116/events", params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(String response) {
@@ -151,10 +153,11 @@ public class HomeActivity extends Activity{
                 startActivity(mainIntent);
                 return true;
             case R.id.refresh:
-                Toast.makeText(getApplicationContext(), "Refreshing.", Toast.LENGTH_LONG).show();
-                RequestParams params = new RequestParams();
-                params.put("page", 0);
-                invokeWS(params);
+                Intent intent = getIntent();
+                intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                finish();
+                overridePendingTransition(0,0);
+                startActivity(intent);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
