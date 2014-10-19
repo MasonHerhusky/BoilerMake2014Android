@@ -54,9 +54,4 @@ public class MyActivity extends Activity {
         Intent intent = new Intent(this, RegisterAccount.class);
         startActivity(intent);
     }
-
-    @Override
-    public void onBackPressed() {
-        moveTaskToBack(true);  //On back button press on this page, close the app.
-    }
 }
