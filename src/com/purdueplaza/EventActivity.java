@@ -23,30 +23,30 @@ import org.json.JSONObject;
 
 public class EventActivity extends Activity{
 
-    String userId;
+    String event_id;
     boolean isOwner;
     Menu menu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        invokeWS(getIntent().getStringExtra("event_id"));
+        event_id = getIntent().getStringExtra("event_id");
+        invokeWS();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.event);
         Button attend_button = (Button) findViewById(R.id.attend_button);
         attend_button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                String event_id = getIntent().getStringExtra("event_id");
-                attend(event_id);
+                attend();
             }
         });
     }
 
-    public void attend(String event_id) {
+    public void attend() {
         RequestParams params = new RequestParams();
-        invokeWS(event_id);
+        invokeWS();
     }
 
-    public void invokeWS(String event_id) {
+    public void invokeWS() {
         AsyncHttpClient client = new AsyncHttpClient();
 
                 /*  Load API key from prefs.    */
@@ -122,7 +122,7 @@ public class EventActivity extends Activity{
                     public void onClick(DialogInterface dialog, int which) {
                         switch (which){
                             case DialogInterface.BUTTON_POSITIVE:
-                                Toast.makeText(getApplicationContext(), "Not implemented yet.", Toast.LENGTH_LONG).show();
+                                invokeWSDelete();
                                 break;
                             case DialogInterface.BUTTON_NEGATIVE:
                                 //No button clicked
@@ -136,6 +136,41 @@ public class EventActivity extends Activity{
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
+        }
+    }
+
+    public void invokeWSDelete() {
+        AsyncHttpClient client = new AsyncHttpClient();
+
+                /*  Load API key from prefs.    */
+        SharedPreferences settings = getSharedPreferences("Login", Context.MODE_PRIVATE);
+        String key = settings.getString("key", "");
+        client.addHeader("Authorization", key);
+
+        client.delete("http://167.88.118.116/events/" + event_id, new AsyncHttpResponseHandler() {
+            @Override
+            public void onSuccess(String response) {
+                displayDeleteResponse(response);
+            }
+
+            @Override
+            public void onFailure(int statusCode, Throwable error, String content) {
+                displayDeleteResponse(content);
+            }
+        });
+    }
+    public void displayDeleteResponse(String response) {
+        try {
+            JSONObject obj = new JSONObject(response);
+            Toast.makeText(getApplicationContext(), obj.getString("message"), Toast.LENGTH_LONG).show();
+            if(!obj.getBoolean("error")) {
+                Intent mainIntent = new Intent(getApplicationContext(),HomeActivity.class);
+                startActivity(mainIntent);
+            }
+        } catch (JSONException e) {
+            Toast.makeText(getApplicationContext(), "Error: " + e, Toast.LENGTH_LONG).show();
+            e.printStackTrace();
+
         }
     }
 
