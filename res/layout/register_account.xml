@@ -13,7 +13,7 @@
             android:text="Register Account"
             android:textSize="50dp"
 
-            android:textColor="#ff838386"
+            android:textColor="#ff464c63"
             android:id="@+id/textView"/>
     <Space android:layout_width="fill_parent" android:layout_height="50dp"/>
     <TextView
@@ -70,7 +70,6 @@
             android:layout_height="wrap_content"
             android:textColor="#ff7dadd5"
             android:text="Register"
-            android:onClick="submitRegistration"
             android:id="@+id/register_button" android:layout_gravity="center_horizontal"/>
 
 </LinearLayout>

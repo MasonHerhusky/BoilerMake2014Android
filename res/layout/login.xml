@@ -14,8 +14,8 @@
             android:textSize="25dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Please Enter Your Login Details"
-            android:textColor="#ff616163"
+            android:text="Enter Login Details"
+            android:textColor="#ff464c63"
             android:layout_gravity="center"
             />
     <TextView
