@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.*;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
@@ -22,31 +23,23 @@ import org.json.JSONObject;
 
 public class HomeActivity extends Activity{
 
-    private ListView list;
-    final ArrayList<String> names = new ArrayList<String>();
-    final ArrayList<String> descriptions = new ArrayList<String>();
+    private ListView eventList;
     private Button register_event_button;
     private Button search_button;
+
+    ArrayList<String> name_array = new ArrayList<String>();
+    ArrayList<String> desc_array = new ArrayList<String>();
+    ListView list;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        list = (ListView) findViewById(R.id.listView);
-/*
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, null, null);
-        list.setAdapter(arrayAdapter);
-        list.setOnItemClickListener(new OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-                clickedEvent(id);
-            }
-        });
-*/
+        setContentView(R.layout.home);
         /*  Fetch Event Data    */
         RequestParams params = new RequestParams();
         params.put("page", 0);
         invokeWS(params);
+        list = (ListView) findViewById(R.id.listView);
     }
 
     public void invokeWS(RequestParams params) {
@@ -75,14 +68,33 @@ public class HomeActivity extends Activity{
     public void displayResponse(String response) {
         try {
             JSONObject obj = new JSONObject(response);
+            JSONArray events = obj.getJSONArray("events");
             if(obj.getBoolean("error") == false){
                 Toast.makeText(getApplicationContext(), obj.getString("message"), Toast.LENGTH_LONG).show();
-                JSONArray events = obj.getJSONArray("events");
-                for(int i = 0; i < events.length(); i++)
-                    System.out.println("EVENT #" + i + ": " + events.get(i));
-                //Populate list
-            }
-            else{
+
+                name_array = new ArrayList<String>();
+                desc_array = new ArrayList<String>();
+                for (int i = 0, count = events.length(); i < count; i++) {
+                    try {
+                        name_array.add(events.getJSONObject(i).getString("name"));
+                        desc_array.add(events.getJSONObject(i).getString("desc"));
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+                System.out.println(obj.toString());
+                System.out.println(name_array.toString());
+                System.out.println(desc_array.toString());
+
+                String[][] values = new String[2][];
+                values[0] = (String[]) name_array.toArray();
+                values[1] = (String[]) desc_array.toArray();
+                int[] types = new int[]{android.R.id.text1, android.R.id.text2};
+
+                ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+                        android.R.layout.simple_list_item_2, values, types);
+                list.setAdapter(adapter);
+            } else {
                 Toast.makeText(getApplicationContext(), obj.getString("message"), Toast.LENGTH_LONG).show();
             }
         } catch (JSONException e) {

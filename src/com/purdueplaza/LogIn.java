@@ -22,7 +22,7 @@ import com.loopj.android.http.RequestParams;
 
 public class LogIn extends Activity {
 
-    private EditText username;
+    private EditText email;
     private EditText password;
     private Button submit_button;
 
@@ -40,7 +40,7 @@ public class LogIn extends Activity {
     public void addListenerOnButton() {
 
         password = (EditText) findViewById(R.id.password);
-        username = (EditText) findViewById(R.id.username);
+        email = (EditText) findViewById(R.id.username);
         submit_button = (Button) findViewById(R.id.submit_button);
 
         submit_button.setOnClickListener(new OnClickListener() {
@@ -56,11 +56,11 @@ public class LogIn extends Activity {
     }
 
     public void submit(View view) {
-        String email = username.getText().toString();
+        String email2 = email.getText().toString();
         String pass = password.getText().toString();
         RequestParams params = new RequestParams();
         /*  We don't need to check if parameters are correct, they are checked on the server side.  */
-        params.put("email", email);
+        params.put("email", email2);
         params.put("password", pass);
         invokeWS(params);
     }

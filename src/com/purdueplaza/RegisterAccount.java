@@ -1,6 +1,8 @@
 
 package com.purdueplaza;
 
+        import android.content.Context;
+        import android.content.SharedPreferences;
         import org.json.JSONException;
         import org.json.JSONObject;
 
@@ -28,7 +30,6 @@ public class RegisterAccount extends Activity {
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //getActionBar().hide();
         setContentView(R.layout.register_account);
         name = (EditText) findViewById(R.id.name_field);
         password = (EditText) findViewById(R.id.password_field);
@@ -48,6 +49,8 @@ public class RegisterAccount extends Activity {
         });
     }
 
+    private View storedView;
+
     /**
      * Method gets triggered when Register button is clicked
      *
@@ -62,6 +65,7 @@ public class RegisterAccount extends Activity {
         params.put("name", nme);
         params.put("email", eml);
         params.put("password", psswrd);
+        storedView = view;
         invokeWS(params);
     }
 
@@ -89,7 +93,7 @@ public class RegisterAccount extends Activity {
             JSONObject obj = new JSONObject(response);
             if(obj.getBoolean("error") == false){
                 Toast.makeText(getApplicationContext(), obj.getString("message"), Toast.LENGTH_LONG).show();
-                navigatetoLoginActivity();
+                navigateToLoginActivity(obj.getString("apiKey"));
             }
             else{
                 Toast.makeText(getApplicationContext(), obj.getString("message"), Toast.LENGTH_LONG).show();
@@ -103,9 +107,15 @@ public class RegisterAccount extends Activity {
     /**
      * Method which navigates from Register Activity to Login Activity
      */
-    public void navigatetoLoginActivity(){
-        Intent loginIntent = new Intent(getApplicationContext(),LogIn.class);
-        startActivity(loginIntent);
+    public void navigateToLoginActivity(String key){
+        /*  Store the new found key in storage for future use.  */
+        SharedPreferences settings = getSharedPreferences("Login", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = settings.edit();
+        editor.putString("key", key);
+        editor.commit();
+
+        Intent homeIntent = new Intent(getApplicationContext(),HomeActivity.class);
+        startActivity(homeIntent);
     }
 
 }
