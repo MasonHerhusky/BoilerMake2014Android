@@ -61,16 +61,14 @@
             android:textColor="#ffffff"
             android:id="@+id/startTime"
             android:layout_gravity="center"/>
-    <EditText
-            android:layout_width="250dp"
+    <Button
+            android:layout_width="300dp"
+            android:layout_gravity="center"
             android:layout_height="wrap_content"
-            android:ems="10"
-            android:textColor="#ffffff"
-            android:background="#40ffffff"
-            android:minHeight="40dp"
-            android:hint="Start"
-            android:id="@+id/startTime_field"
-            android:layout_gravity="center_horizontal"/>
+            android:text="Pick Start Date and Time"
+            android:background="#40000000"
+            android:id="@+id/editStartTime"
+            android:onClick="showTimePickerDialog" />
     <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -80,16 +78,14 @@
             android:textSize="20dp"
             android:id="@+id/endTime"
             android:layout_gravity="center"/>
-    <EditText
-            android:layout_width="250dp"
+    <Button
+            android:layout_width="300dp"
+            android:layout_gravity="center"
             android:layout_height="wrap_content"
-            android:ems="10"
-            android:background="#40ffffff"
-            android:minHeight="40dp"
-            android:hint="End"
-            android:textColor="#ffffff"
-            android:id="@+id/endTime_field"
-            android:layout_gravity="center_horizontal"/>
+            android:text="Pick End Date and Time"
+            android:background="#40000000"
+            android:id="@+id/editEndTime"
+            android:onClick="showTimePickerDialog" />
     <Space
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

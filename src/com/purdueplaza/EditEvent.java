@@ -24,10 +24,17 @@ public class EditEvent extends Activity {
 
     private EditText name;
     private EditText desc;
-    private EditText start;
-    private EditText end;
+    private Button startTime_button;
+    private Button endTime_button;
+    private String start = "";
+    private String end = "";
     private Button edit_button;
     String event_id;
+
+    DatePickerFragment startDateFragment = new DatePickerFragment();
+    DatePickerFragment endDateFragment = new DatePickerFragment();
+    TimePickerFragment startTimeFragment = new TimePickerFragment();
+    TimePickerFragment endTimeFragment = new TimePickerFragment();
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,8 +42,7 @@ public class EditEvent extends Activity {
         setContentView(R.layout.edit_event);
         name = (EditText) findViewById(R.id.name_field);
         desc = (EditText) findViewById(R.id.description_field);
-        start = (EditText) findViewById(R.id.startTime_field);
-        end = (EditText) findViewById(R.id.endTime_field);
+
         addListenerOnButton();
     }
 
@@ -48,6 +54,39 @@ public class EditEvent extends Activity {
                 submit(v);
             }
         });
+
+        startTime_button = (Button) findViewById(R.id.editStartTime);
+        startTime_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showStartTimePickerDialog(view);
+                showStartDatePickerDialog(view);
+            }
+        });
+        endTime_button = (Button) findViewById(R.id.editEndTime);
+        endTime_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showEndTimePickerDialog(view);
+                showEndDatePickerDialog(view);
+            }
+        });
+    }
+
+    public void showStartDatePickerDialog(View v) {
+        startDateFragment.show(this.getFragmentManager(), "datePicker");
+    }
+
+    public void showStartTimePickerDialog(View v) {
+        startTimeFragment.show(this.getFragmentManager(), "timePicker");
+    }
+
+    public void showEndTimePickerDialog(View v) {
+        endTimeFragment.show(this.getFragmentManager(), "timePicker");
+    }
+
+    public void showEndDatePickerDialog(View v) {
+        endDateFragment.show(this.getFragmentManager(), "datePicker");
     }
 
     /**
@@ -56,16 +95,25 @@ public class EditEvent extends Activity {
      * @param view
      */
     public void submit(View view) {
+        start += startDateFragment.getDate();
+
+        end += endDateFragment.getDate();
+
+        start += " at " + startTimeFragment.getTime();
+        startTime_button.setText(start);
+
+        end += " at " + endTimeFragment.getTime();
+        endTime_button.setText(end);
+
         String eventName = name.getText().toString();
         String description = desc.getText().toString();
-        String startTime = start.getText().toString();
-        String endTime = end.getText().toString();
+
         RequestParams params = new RequestParams();
         /*  We don't need to check if parameters are correct, they are checked on the server side.  */
         params.put("name", eventName);
         params.put("desc", description);
-        params.put("start", startTime);
-        params.put("end", endTime);
+        params.put("start", start);
+        params.put("end", end);
         invokeWS(params);
     }
 
