@@ -33,7 +33,7 @@
     <EditText
             android:id="@+id/username"
             android:layout_gravity="center_horizontal|bottom"
-            android:layout_width="150dp"
+            android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:text=""
             android:inputType="textEmailAddress"
@@ -47,17 +47,21 @@
             />
     <EditText
             android:id="@+id/password"
-            android:layout_width="150dp"
+            android:layout_width="250dp"
             android:layout_gravity="center_horizontal|bottom"
             android:layout_height="wrap_content"
             android:text=""
             android:inputType="textWebPassword"
             />
+    <Space
+           android:layout_width="wrap_content"
+           android:layout_height="25dp"/>
     <Button
             android:id="@+id/submit_button"
-            android:layout_width="wrap_content"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="Submit"
+            android:textColor="#ff50c6d1"
             />
 </LinearLayout>
