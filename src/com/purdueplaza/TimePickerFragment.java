@@ -13,8 +13,10 @@ import java.util.Calendar;
 /**
  * Created by masonherhusky on 10/19/14.
  */
-public  class TimePickerFragment extends DialogFragment
+public class TimePickerFragment extends DialogFragment
         implements TimePickerDialog.OnTimeSetListener {
+
+    private String time = "";
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -29,6 +31,15 @@ public  class TimePickerFragment extends DialogFragment
     }
 
     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-        // Do something with the time chosen by the user
+        if(hourOfDay > 12) {
+            hourOfDay -= 12;
+            time = hourOfDay + ": " +  minute + " PM";
+        }
+        else
+            time = hourOfDay + ": " +  minute + " AM";
+    }
+
+    public String getTime() {
+        return time;
     }
 }
