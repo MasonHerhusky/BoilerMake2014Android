@@ -22,7 +22,7 @@
                     android:layout_width="wrap_content"
                     android:textColor="#ff484848"
                     android:layout_height="wrap_content"
-                    android:text="Event Title"
+                    android:text="Loading..."
                     android:id="@+id/eventTitle"
                     android:gravity="center"
                     android:textSize="50dp"
@@ -33,7 +33,7 @@
             <TextView
                     android:layout_width="350dp"
                     android:layout_height="wrap_content"
-                    android:text="August 25th"
+                    android:text=""
                     android:id="@+id/startTime"
                     android:textColor="#ff545454"
                     android:textSize="30dp"
@@ -41,7 +41,7 @@
             <TextView
                     android:layout_width="350dp"
                     android:layout_height="wrap_content"
-                    android:text="August 25th"
+                    android:text=""
                     android:textColor="#ff545454"
                     android:id="@+id/endTime"
                     android:textSize="30dp"
@@ -55,7 +55,7 @@
             <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Description of the event being hosted with lots of words and descriptive adjectives and other things to be include within the description of said event. There could possibly be photos beneath this text which would looks great."
+                    android:text=""
                     android:id="@+id/eventDescription"
                     android:textSize="20dp"
                     />

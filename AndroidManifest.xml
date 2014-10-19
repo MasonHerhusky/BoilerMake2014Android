@@ -30,7 +30,7 @@
         </activity>
         <activity android:name="EventActivity"
                   android:label="@string/event_view"
-                  android:parentActivityName="com.purdueplaza.EventActivity">
+                  android:parentActivityName="com.purdueplaza.HomeActivity">
         </activity>
     </application>
 </manifest>

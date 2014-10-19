@@ -12,7 +12,6 @@ import android.view.View;
 import android.widget.*;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
@@ -71,8 +70,6 @@ public class HomeActivity extends Activity{
             JSONObject obj = new JSONObject(response);
             JSONArray events = obj.getJSONArray("events");
             if(obj.getBoolean("error") == false){
-                Toast.makeText(getApplicationContext(), obj.getString("message"), Toast.LENGTH_LONG).show();
-
                 name_array = new ArrayList<String>();
                 desc_array = new ArrayList<String>();
                 for (int i = 0, count = events.length(); i < count; i++) {
@@ -84,9 +81,6 @@ public class HomeActivity extends Activity{
                         e.printStackTrace();
                     }
                 }
-                System.out.println(obj.toString());
-                System.out.println(name_array.toString());
-                System.out.println(desc_array.toString());
 
                 ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
                         android.R.layout.simple_list_item_1, android.R.id.text1, name_array);
@@ -108,18 +102,12 @@ public class HomeActivity extends Activity{
     }
 
     public void addListenerOnButton() {
-
         register_event_button = (Button) findViewById(R.id.register_button);
-
         register_event_button.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View v) {
-
                 register(v);
-
             }
-
         });
     }
 
@@ -129,8 +117,10 @@ public class HomeActivity extends Activity{
     }
 
     public void clickedEvent(String id) {
+        String newId = id.substring(8);
+        newId = newId.substring(0, newId.length() - 2);
         Intent eventIntent = new Intent(getApplicationContext(),EventActivity.class);
-        eventIntent.putExtra("event_id", id);
+        eventIntent.putExtra("event_id",newId);
         startActivity(eventIntent);
     }
 
