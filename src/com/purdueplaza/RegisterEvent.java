@@ -97,6 +97,8 @@ public class RegisterEvent extends Activity {
      * @param view
      */
     public void submit(View view) {
+        start = "";
+        end = "";
         start += startDateFragment.getDate();
 
         end += endDateFragment.getDate();
