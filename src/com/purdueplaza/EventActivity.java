@@ -1,10 +1,16 @@
 package com.purdueplaza;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.opengl.Visibility;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -16,6 +22,10 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class EventActivity extends Activity{
+
+    String userId;
+    boolean isOwner;
+    Menu menu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +71,16 @@ public class EventActivity extends Activity{
         try {
             JSONObject obj = new JSONObject(response);
             if (obj.getBoolean("error") == false) {
+                MenuItem delete = menu.findItem(R.id.delete);
+                MenuItem edit = menu.findItem(R.id.edit);
+                isOwner = obj.getBoolean("isOwner");
+                if(isOwner) {
+                    edit.setVisible(true);
+                    delete.setVisible(true);
+                } else {
+                    edit.setVisible(false);
+                    delete.setVisible(false);
+                }
                 //Toast.makeText(getApplicationContext(), obj.getString("message"), Toast.LENGTH_LONG).show();
                 TextView nme = (TextView) findViewById(R.id.eventTitle);
                 nme.setText(obj.getString("name"));
@@ -79,6 +99,43 @@ public class EventActivity extends Activity{
             Toast.makeText(getApplicationContext(), "Error: " + e, Toast.LENGTH_LONG).show();
             e.printStackTrace();
 
+        }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        this.menu = menu;
+        getMenuInflater().inflate(R.menu.event_activity_actions, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle presses on the action bar items
+        switch (item.getItemId()) {
+            case R.id.edit:
+                Toast.makeText(getApplicationContext(), "Editing..", Toast.LENGTH_LONG).show();
+                return true;
+            case R.id.delete:
+                DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        switch (which){
+                            case DialogInterface.BUTTON_POSITIVE:
+                                Toast.makeText(getApplicationContext(), "Not implemented yet.", Toast.LENGTH_LONG).show();
+                                break;
+                            case DialogInterface.BUTTON_NEGATIVE:
+                                //No button clicked
+                                break;
+                        }
+                    }
+                };
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.setMessage("Are you sure?").setPositiveButton("Yes", dialogClickListener)
+                        .setNegativeButton("No", dialogClickListener).show();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
     }
 
