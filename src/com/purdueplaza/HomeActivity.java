@@ -25,7 +25,6 @@ public class HomeActivity extends Activity{
 
     private ListView eventList;
     private Button register_event_button;
-    private Button search_button;
 
     ArrayList<String> name_array = new ArrayList<String>();
     ArrayList<String> desc_array = new ArrayList<String>();
@@ -116,19 +115,6 @@ public class HomeActivity extends Activity{
             }
 
         });
-
-        search_button = (Button) findViewById(R.id.search_button);
-
-        search_button.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-
-                searchEvents(v);
-
-            }
-
-        });
     }
 
     public void registerEvent(View view){
@@ -142,7 +128,7 @@ public class HomeActivity extends Activity{
     }
 
     public void clickedEvent(long id) {
-        Intent eventIntent = new Intent(getApplicationContext(),Event.class);
+        Intent eventIntent = new Intent(getApplicationContext(),EventActivity.class);
         startActivity(eventIntent);
         //TODO store event ID in intent to send it to Event activity
     }
