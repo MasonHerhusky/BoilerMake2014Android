@@ -90,7 +90,6 @@ public class EventActivity extends Activity{
                     edit.setVisible(false);
                     delete.setVisible(false);
                 }
-                //Toast.makeText(getApplicationContext(), obj.getString("message"), Toast.LENGTH_LONG).show();
                 TextView nme = (TextView) findViewById(R.id.eventTitle);
                 nme.setText(obj.getString("name"));
                 TextView dsc = (TextView) findViewById(R.id.eventDescription);
@@ -99,7 +98,9 @@ public class EventActivity extends Activity{
                 start.setText(obj.getString("start"));
                 TextView end = (TextView) findViewById(R.id.endTime);
                 end.setText(obj.getString("end"));
-                if(obj.getBoolean("attending")) {
+                if(isOwner) {
+                    //Don't show any buttons.
+                }else if(obj.getBoolean("attending")) {
                     Button button = (Button) findViewById(R.id.unattend_button);
                     button.setVisibility(View.VISIBLE);
                 } else {
@@ -259,7 +260,7 @@ public class EventActivity extends Activity{
                 overridePendingTransition(0,0);
                 startActivity(intent);
             } else {
-                Toast.makeText(getApplicationContext(), obj.getString("message"), Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "You cannot unattend an event that you are hosting!", Toast.LENGTH_LONG).show();
             }
         } catch (JSONException e) {
             Toast.makeText(getApplicationContext(), "Error: " + e, Toast.LENGTH_LONG).show();
