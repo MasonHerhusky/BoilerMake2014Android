@@ -27,7 +27,6 @@ public class HomeActivity extends Activity{
     private Button register_event_button;
     private Button search_button;
 
-    ArrayList<String> event_id_array = new ArrayList<String>();
     ArrayList<String> name_array = new ArrayList<String>();
     ArrayList<String> desc_array = new ArrayList<String>();
     ListView list;
@@ -59,7 +58,7 @@ public class HomeActivity extends Activity{
             @Override
             public void onFailure(int statusCode, Throwable error, String content) {
                 if(content == null)
-                    Toast.makeText(getApplicationContext(), "Something has gone very wrong! Please check your internet connection!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "Check your internet connection!", Toast.LENGTH_LONG).show();
                 else
                     displayResponse(content);
             }
@@ -77,7 +76,6 @@ public class HomeActivity extends Activity{
                 desc_array = new ArrayList<String>();
                 for (int i = 0, count = events.length(); i < count; i++) {
                     try {
-                        event_id_array.add(events.getJSONObject(i).getString("_id"));
                         name_array.add(events.getJSONObject(i).getString("name"));
                         desc_array.add(events.getJSONObject(i).getString("desc"));
                     } catch (JSONException e) {
@@ -88,16 +86,13 @@ public class HomeActivity extends Activity{
                 System.out.println(name_array.toString());
                 System.out.println(desc_array.toString());
 
-                ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-                        android.R.layout.simple_list_item_1, android.R.id.text1, name_array);
+                String[][] values = new String[2][];
+                values[0] = (String[]) name_array.toArray();
+                values[1] = (String[]) desc_array.toArray();
+                int[] types = new int[]{android.R.id.text1, android.R.id.text2};
 
-                list.setAdapter(adapter);
-                list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        clickedEvent(event_id_array.get(position));
-                    }
-                });
+             //   ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_2, values, types);
+             //   list.setAdapter(adapter);
             } else {
                 Toast.makeText(getApplicationContext(), obj.getString("message"), Toast.LENGTH_LONG).show();
             }
@@ -116,22 +111,40 @@ public class HomeActivity extends Activity{
             @Override
             public void onClick(View v) {
 
-                register(v);
+                registerEvent(v);
+
+            }
+
+        });
+
+        search_button = (Button) findViewById(R.id.search_button);
+
+        search_button.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+
+                searchEvents(v);
 
             }
 
         });
     }
 
-    public void register(View view){
+    public void registerEvent(View view){
         Intent registerIntent = new Intent(getApplicationContext(),RegisterEvent.class);
         startActivity(registerIntent);
     }
 
-    public void clickedEvent(String id) {
-        Intent eventIntent = new Intent(getApplicationContext(),EventActivity.class);
-        eventIntent.putExtra("event_id", id);
+
+    public void searchEvents(View view) {
+
+    }
+
+    public void clickedEvent(long id) {
+        Intent eventIntent = new Intent(getApplicationContext(),Event.class);
         startActivity(eventIntent);
+        //TODO store event ID in intent to send it to Event activity
     }
 
     @Override
