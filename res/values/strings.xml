@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Plaza</string>
+    <string name="register_account">Register an Account</string>
+    <string name="register_event">Register an Event</string>
+    <string name="login">Login</string>
 </resources>

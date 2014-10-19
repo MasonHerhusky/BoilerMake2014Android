@@ -14,16 +14,19 @@
             </intent-filter>
         </activity>
         <activity android:name="LogIn"
-                  android:label="@string/app_name">
+                  android:label="@string/login"
+                  android:parentActivityName="com.purdueplaza.MyActivity">
         </activity>
         <activity android:name="RegisterAccount"
-                  android:label="@string/app_name">
+                  android:label="@string/register_account"
+                  android:parentActivityName="com.purdueplaza.MyActivity">
         </activity>
         <activity android:name="HomeActivity"
                   android:label="@string/app_name">
         </activity>
         <activity android:name="RegisterEvent"
-                  android:label="@string/app_name">
+                  android:label="@string/register_event"
+                  android:parentActivityName="com.purdueplaza.HomeActivity">
         </activity>
     </application>
 </manifest>
