@@ -39,11 +39,20 @@ public class EventActivity extends Activity{
                 attend();
             }
         });
+        Button unattend_button = (Button) findViewById(R.id.unattend_button);
+        unattend_button.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                unattend();
+            }
+        });
     }
 
     public void attend() {
-        RequestParams params = new RequestParams();
-        invokeWS();
+        invokeWSAttend();
+    }
+
+    public void unattend() {
+        invokeWSUnattend();
     }
 
     public void invokeWS() {
@@ -90,8 +99,13 @@ public class EventActivity extends Activity{
                 start.setText(obj.getString("start"));
                 TextView end = (TextView) findViewById(R.id.endTime);
                 end.setText(obj.getString("end"));
-                Button button = (Button) findViewById(R.id.attend_button);
-                button.setVisibility(View.VISIBLE);
+                if(obj.getBoolean("attending")) {
+                    Button button = (Button) findViewById(R.id.unattend_button);
+                    button.setVisibility(View.VISIBLE);
+                } else {
+                    Button button = (Button) findViewById(R.id.attend_button);
+                    button.setVisibility(View.VISIBLE);
+                }
             } else {
                 Toast.makeText(getApplicationContext(), response, Toast.LENGTH_LONG).show();
             }
@@ -173,5 +187,86 @@ public class EventActivity extends Activity{
 
         }
     }
+
+    public void invokeWSAttend() {
+        AsyncHttpClient client = new AsyncHttpClient();
+
+                /*  Load API key from prefs.    */
+        SharedPreferences settings = getSharedPreferences("Login", Context.MODE_PRIVATE);
+        String key = settings.getString("key", "");
+        client.addHeader("Authorization", key);
+
+        client.post("http://167.88.118.116/events/attend/" + event_id, new AsyncHttpResponseHandler() {
+            @Override
+            public void onSuccess(String response) {
+                displayAttendResponse(response);
+            }
+
+            @Override
+            public void onFailure(int statusCode, Throwable error, String content) {
+                displayAttendResponse(content);
+            }
+        });
+    }
+    public void displayAttendResponse(String response) {
+        try {
+            JSONObject obj = new JSONObject(response);
+            if(!obj.getBoolean("error")) {
+                Toast.makeText(getApplicationContext(), "You are now marked as attending!", Toast.LENGTH_LONG).show();
+                Intent intent = getIntent();
+                intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                finish();
+                overridePendingTransition(0,0);
+                startActivity(intent);
+            } else {
+                Toast.makeText(getApplicationContext(), obj.getString("message"), Toast.LENGTH_LONG).show();
+            }
+        } catch (JSONException e) {
+            Toast.makeText(getApplicationContext(), "Error: " + e, Toast.LENGTH_LONG).show();
+            e.printStackTrace();
+
+        }
+    }
+
+    public void invokeWSUnattend() {
+        AsyncHttpClient client = new AsyncHttpClient();
+
+                /*  Load API key from prefs.    */
+        SharedPreferences settings = getSharedPreferences("Login", Context.MODE_PRIVATE);
+        String key = settings.getString("key", "");
+        client.addHeader("Authorization", key);
+
+        client.delete("http://167.88.118.116/events/attend/" + event_id, new AsyncHttpResponseHandler() {
+            @Override
+            public void onSuccess(String response) {
+                displayUnattendResponse(response);
+            }
+
+            @Override
+            public void onFailure(int statusCode, Throwable error, String content) {
+                displayUnattendResponse(content);
+            }
+        });
+    }
+    public void displayUnattendResponse(String response) {
+        try {
+            JSONObject obj = new JSONObject(response);
+            if(!obj.getBoolean("error")) {
+                Toast.makeText(getApplicationContext(), "You have are no longer attending the event.", Toast.LENGTH_LONG).show();
+                Intent intent = getIntent();
+                intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                finish();
+                overridePendingTransition(0,0);
+                startActivity(intent);
+            } else {
+                Toast.makeText(getApplicationContext(), obj.getString("message"), Toast.LENGTH_LONG).show();
+            }
+        } catch (JSONException e) {
+            Toast.makeText(getApplicationContext(), "Error: " + e, Toast.LENGTH_LONG).show();
+            e.printStackTrace();
+
+        }
+    }
+
 
 }
