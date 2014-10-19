@@ -68,7 +68,9 @@
             android:hint="password"
             android:inputType="textPassword"
             android:ems="10"
-            android:id="@+id/password_field" android:layout_gravity="center_horizontal"/>
+            android:id="@+id/password_field" android:layout_gravity="center_horizontal"
+            android:imeActionLabel="Register"
+            />
     <Space
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -78,6 +80,8 @@
             android:layout_height="wrap_content"
             android:textColor="#ff7dadd5"
             android:text="Register"
-            android:id="@+id/register_button" android:layout_gravity="center_horizontal"/>
+            android:id="@+id/register_button"
+            android:layout_gravity="center_horizontal"
+             />
 
 </LinearLayout>

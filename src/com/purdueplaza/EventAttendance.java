@@ -64,12 +64,8 @@ public class EventAttendance extends Activity {
             JSONObject obj = new JSONObject(response);
             JSONArray users = obj.getJSONArray("attending");
             if(obj.getBoolean("error") == false){
-                for (int i = 0, count = users.length(); i < count; i++) {
-                    try {
-                        user_array.add(users.getJSONObject(i).getString("name"));
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
+                for(int i = 0; i < users.length(); i++) {
+                   user_array.add(users.get(i).toString());
                 }
                 ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
                         android.R.layout.simple_list_item_1, android.R.id.text1, user_array);

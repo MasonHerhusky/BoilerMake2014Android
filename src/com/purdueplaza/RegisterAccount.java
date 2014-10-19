@@ -3,6 +3,9 @@ package com.purdueplaza;
 
         import android.content.Context;
         import android.content.SharedPreferences;
+        import android.view.KeyEvent;
+        import android.view.inputmethod.EditorInfo;
+        import android.widget.TextView;
         import org.json.JSONException;
         import org.json.JSONObject;
 
@@ -35,6 +38,13 @@ public class RegisterAccount extends Activity {
         password = (EditText) findViewById(R.id.password_field);
         email = (EditText) findViewById(R.id.email_field);
         addListenerOnButton();
+        password.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                submit(v);
+                return true;
+            }
+        });
     }
 
     public void addListenerOnButton() {

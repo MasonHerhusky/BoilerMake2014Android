@@ -7,4 +7,8 @@
           android:title=""
           android:icon="@drawable/ic_action_refresh"
           android:showAsAction="always" />
+    <item android:id="@+id/add"
+          android:title=""
+          android:icon="@drawable/ic_action_new"
+          android:showAsAction="always" />
 </menu>

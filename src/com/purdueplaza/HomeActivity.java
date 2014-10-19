@@ -37,7 +37,6 @@ public class HomeActivity extends Activity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home);
-        addListenerOnButton();
         name_array = new ArrayList<String>();
         desc_array = new ArrayList<String>();
         /*  Fetch Event Data    */
@@ -103,21 +102,6 @@ public class HomeActivity extends Activity{
         }
     }
 
-    public void addListenerOnButton() {
-        register_event_button = (Button) findViewById(R.id.register_button);
-        register_event_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                register(v);
-            }
-        });
-    }
-
-    public void register(View view){
-        Intent registerIntent = new Intent(getApplicationContext(),RegisterEvent.class);
-        startActivity(registerIntent);
-    }
-
     public void clickedEvent(String id) {
         String newId = id.substring(8);
         newId = newId.substring(0, newId.length() - 2);
@@ -165,6 +149,10 @@ public class HomeActivity extends Activity{
                 finish();
                 overridePendingTransition(0,0);
                 startActivity(intent);
+                return true;
+            case R.id.add:
+                Intent registerIntent = new Intent(getApplicationContext(),RegisterEvent.class);
+                startActivity(registerIntent);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
