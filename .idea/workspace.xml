@@ -26,8 +26,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="70369a93-d7dd-43f3-af83-92eaeda8d55a" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/event_attendance.xml" afterPath="$PROJECT_DIR$/res/layout/event_attendance.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/home.xml" afterPath="$PROJECT_DIR$/res/layout/home.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="BoilerMake2014Android.iws" />
@@ -849,7 +847,7 @@
       <workItem from="1413715664452" duration="269000" />
       <workItem from="1413722518589" duration="1771000" />
       <workItem from="1413724304267" duration="1794000" />
-      <workItem from="1413727301796" duration="424000" />
+      <workItem from="1413727301796" duration="432000" />
     </task>
     <task id="LOCAL-00001" summary="Changed the design of log In slightly&#10;">
       <created>1413681245549</created>
@@ -959,14 +957,18 @@
       <created>1413724996129</created>
       <updated>1413724996129</updated>
     </task>
-    <option name="localTasksCounter" value="28" />
+    <task id="LOCAL-00028" summary="changed title of event">
+      <created>1413727729873</created>
+      <updated>1413727729873</updated>
+    </task>
+    <option name="localTasksCounter" value="29" />
     <servers />
   </component>
   <component name="TemplateSettings">
     <defaultShortcut shortcut="TAB" />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="33406000" />
+    <option name="totallyTimeSpent" value="33414000" />
   </component>
   <component name="TodoConfiguration">
     <pattern icon="default" useCustomColors="false" case-sensitive="false" pattern="\btodo\b.*">
