@@ -10,7 +10,7 @@
             android:layout_width="wrap_content"
             android:gravity="center"
             android:layout_height="wrap_content"
-            android:text="Register Event"
+            android:text="Create Event"
             android:layout_gravity="center"
             android:textSize="50dp"
             android:textColor="#ff838386"
@@ -66,6 +66,7 @@
             android:layout_width="300dp"
             android:layout_gravity="center"
             android:layout_height="wrap_content"
+            android:textColor="#ffb6b6ba"
             android:text="Pick Start Date and Time"
             android:background="#40000000"
             android:id="@+id/startTime_button"
@@ -87,6 +88,7 @@
             android:layout_height="wrap_content"
             android:text="Pick End Date and Time"
             android:id="@+id/endTime_button"
+            android:textColor="#ffb6b6ba"
             android:background="#40000000"
             android:onClick="showTimePickerDialog" />
 

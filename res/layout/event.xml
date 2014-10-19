@@ -3,7 +3,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="vertical"
               android:layout_width="match_parent"
-              android:background="@drawable/blurrycity"
+              android:background="@drawable/blurrycity2"
               android:layout_height="match_parent">
 
 
@@ -24,7 +24,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:textColor="#ffffff"
+                    android:textColor="#ffffffff"
                     android:text=""
                     android:id="@+id/eventTitle"
                     android:gravity="center"
@@ -43,8 +43,11 @@
                     android:layout_width="350dp"
                     android:layout_height="wrap_content"
                     android:text=""
+                    android:background="#307dadd5"
+                    android:minHeight="45dp"
                     android:id="@+id/startTime"
-                    android:textColor="#ff616163"
+                    android:gravity="center"
+                    android:textColor="#bbffffff"
                     android:textSize="30dp"
                     />
             <TextView
@@ -58,7 +61,10 @@
                     android:layout_width="350dp"
                     android:layout_height="wrap_content"
                     android:text=""
-                    android:textColor="#ff616163"
+                    android:background="#307dadd5"
+                    android:minHeight="45dp"
+                    android:gravity="center"
+                    android:textColor="#bbffffff"
                     android:id="@+id/endTime"
                     android:textSize="30dp"
                     />
@@ -78,7 +84,9 @@
             <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="#ffffff"
+                    android:textColor="#aaffffff"
+                    android:minHeight="100dp"
+                    android:background="#307dadd5"
                     android:text=""
                     android:id="@+id/eventDescription"
                     android:inputType="textMultiLine"
@@ -98,13 +106,13 @@
             <Button
                     android:layout_height="wrap_content"
                     android:layout_width="200dp"
-                    android:background="#ff0000"
+                    android:background="#75ff0000"
                     android:text="Unattend Event"
                     android:textColor="#FFFFFF"
                     android:id="@+id/unattend_button" android:visibility="invisible"
                     android:layout_gravity="center_vertical"/>
             </FrameLayout>
-                <Space android:layout_width="fill_parent" android:layout_height="40dp"/>
+                <Space android:layout_width="fill_parent" android:layout_height="20dp"/>
             <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -114,7 +122,7 @@
                         android:layout_height="wrap_content"
                         android:layout_width="231dp"
                         android:text="Who's Attending?"
-                        android:textColor="#FFFFFF"
+                        android:textColor="#ff7dadd5"
                         android:id="@+id/all_attending_button"
                         android:layout_gravity="center_horizontal"
                         android:visibility="invisible"/>
