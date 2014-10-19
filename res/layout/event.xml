@@ -66,13 +66,24 @@
                     android:textSize="20dp"
                     />
             <Space android:layout_width="fill_parent" android:layout_height="40dp"/>
-            <Button
+            <FrameLayout
+                    android:layout_height="50dp"
                     android:layout_width="200dp"
+                    android:layout_gravity="center">
+            <Button
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
+                    android:layout_width="200dp"
                     android:text="Attend Event"
                     android:textColor="#ff7dadd5"
                     android:id="@+id/attend_button" android:visibility="invisible"/>
+            <Button
+                    android:layout_height="wrap_content"
+                    android:layout_width="200dp"
+                    android:background="#ff0000"
+                    android:text="Unattend Event"
+                    android:textColor="#FFFFFF"
+                    android:id="@+id/unattend_button" android:visibility="invisible"/>
+            </FrameLayout>
         </LinearLayout>
     </ScrollView>
 
