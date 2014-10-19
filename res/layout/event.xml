@@ -15,6 +15,7 @@
             android:id="@+id/scrollView">
 
         <LinearLayout android:layout_width="wrap_content"
+                      android:layout_gravity="center"
                       android:layout_height="wrap_content"
                       android:orientation="vertical" android:id="@+id/linear">
 
@@ -82,7 +83,7 @@
                     android:visibility="invisible"/>
 
             <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:textColor="#aaffffff"
                     android:minHeight="100dp"
