@@ -70,7 +70,7 @@
                     android:layout_gravity="center"
                     android:text="Attend Event"
                     android:textColor="#ff7dadd5"
-                    android:id="@+id/attend_button"/>
+                    android:id="@+id/attend_button" android:visibility="invisible"/>
         </LinearLayout>
     </ScrollView>
 

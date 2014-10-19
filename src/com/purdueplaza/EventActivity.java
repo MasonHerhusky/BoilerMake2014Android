@@ -70,6 +70,8 @@ public class EventActivity extends Activity{
                 start.setText(obj.getString("start"));
                 TextView end = (TextView) findViewById(R.id.endTime);
                 end.setText(obj.getString("end"));
+                Button button = (Button) findViewById(R.id.attend_button);
+                button.setVisibility(View.VISIBLE);
             } else {
                 Toast.makeText(getApplicationContext(), response, Toast.LENGTH_LONG).show();
             }

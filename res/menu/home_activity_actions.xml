@@ -3,4 +3,8 @@
     <item android:id="@+id/action_settings"
           android:title="@string/logout"
           android:showAsAction="never" />
+    <item android:id="@+id/refresh"
+          android:title=""
+          android:icon="@drawable/ic_action_refresh"
+          android:showAsAction="always" />
 </menu>

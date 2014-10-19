@@ -1,5 +1,7 @@
 package com.purdueplaza;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -75,6 +77,12 @@ public class RegisterEvent extends Activity {
      */
     public void invokeWS(RequestParams params) {
         AsyncHttpClient client = new AsyncHttpClient();
+
+        /*  Load API key from prefs.    */
+        SharedPreferences settings = getSharedPreferences("Login", Context.MODE_PRIVATE);
+        String key = settings.getString("key", "");
+        client.addHeader("Authorization", key);
+
         client.post("http://167.88.118.116/events",params ,new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(String response) {
@@ -110,7 +118,7 @@ public class RegisterEvent extends Activity {
      * Method which navigates from Register Activity to Login Activity
      */
     public void navigatetoHomeActivity(){
-        Intent homeIntent = new Intent(getApplicationContext(),LogIn.class);
+        Intent homeIntent = new Intent(getApplicationContext(),HomeActivity.class);
         startActivity(homeIntent);
     }
 

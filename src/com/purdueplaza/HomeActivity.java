@@ -35,6 +35,7 @@ public class HomeActivity extends Activity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home);
+        addListenerOnButton();
         /*  Fetch Event Data    */
         RequestParams params = new RequestParams();
         params.put("page", 0);
@@ -148,6 +149,12 @@ public class HomeActivity extends Activity{
                 Intent mainIntent = new Intent(getApplicationContext(),MyActivity.class);
                 Toast.makeText(getApplicationContext(), "You have successfully logged out.", Toast.LENGTH_LONG).show();
                 startActivity(mainIntent);
+                return true;
+            case R.id.refresh:
+                Toast.makeText(getApplicationContext(), "Refreshing.", Toast.LENGTH_LONG).show();
+                RequestParams params = new RequestParams();
+                params.put("page", 0);
+                invokeWS(params);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
