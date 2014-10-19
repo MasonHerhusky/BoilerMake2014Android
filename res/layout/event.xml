@@ -4,10 +4,8 @@
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:background="@drawable/blurrycity3"
-              android:layout_height="match_parent">
-
-
-
+              android:layout_height="match_parent"
+              android:layout_alignParentBottom="true" >
 
     <ScrollView
             android:layout_width="fill_parent"
@@ -20,12 +18,11 @@
                   android:layout_gravity="center"
                   android:orientation="vertical" android:id="@+id/linear">
 
-
-        <Space android:layout_width="20dp" android:layout_height="115dp"/>
+        <Space android:layout_width="fill_parent" android:layout_height="30dp"/>
 
         <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_gravity="center"
                 android:textColor="#ffffffff"
                 android:text=""
@@ -34,14 +31,16 @@
                 android:textSize="40dp"
                 />
 
-        <Space android:layout_width="20dp" android:layout_height="25dp"/>
+        <Space android:layout_width="fill_parent" android:layout_height="25dp"/>
+
         <TextView
                 android:text="Start Time:"
                 android:textSize="20dp"
                 android:textColor="#fff3f3f9"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:visibility="invisible"/>
+                android:visibility="invisible"
+                android:id="@+id/register_start"/>
         <TextView
                 android:layout_width="350dp"
                 android:layout_height="wrap_content"
@@ -59,7 +58,8 @@
                 android:textColor="#fff3f3f9"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:visibility="invisible"/>
+                android:visibility="invisible"
+                android:id="@+id/register_end"/>
         <TextView
                 android:layout_width="350dp"
                 android:layout_height="wrap_content"
@@ -73,29 +73,28 @@
                 />
         <Space android:layout_width="20dp" android:layout_height="25dp"/>
 
-
-        <Space android:layout_width="fill_parent" android:layout_height="20dp"/>
-
         <TextView
                 android:text="Description:"
                 android:textSize="20dp"
                 android:textColor="#fff3f3f9"
+                android:background="#307dadd5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:visibility="invisible"/>
+                android:visibility="invisible"
+                android:id="@+id/register_desc"/>
 
         <TextView
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:textColor="#aaffffff"
-                android:minHeight="100dp"
                 android:background="#307dadd5"
+                android:minHeight="100dp"
                 android:text=""
                 android:id="@+id/eventDescription"
                 android:inputType="textMultiLine"
                 android:textSize="20dp"
                 />
-        <Space android:layout_width="fill_parent" android:layout_height="40dp"/>
+        <Space android:layout_width="fill_parent" android:layout_height="15dp"/>
         <FrameLayout
                 android:layout_height="50dp"
                 android:layout_width="200dp"
@@ -129,7 +128,6 @@
                     android:id="@+id/all_attending_button"
                     android:layout_gravity="center_horizontal"
                     android:visibility="invisible"/>
-        <Space android:layout_width="fill_parent" android:layout_height="40dp"/>
     </LinearLayout>
     </ScrollView>
 </LinearLayout>

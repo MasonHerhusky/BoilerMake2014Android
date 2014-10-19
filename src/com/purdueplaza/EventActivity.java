@@ -6,6 +6,8 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -107,8 +109,16 @@ public class EventActivity extends Activity{
                 attendance_text.setText(obj.getInt("numAttending") + " in attendance.");
                 Button attendance = (Button) findViewById(R.id.all_attending_button);
                 attendance.setVisibility(View.VISIBLE);
+                TextView reg_desc = (TextView) findViewById(R.id.register_desc);
+                reg_desc.setVisibility(View.VISIBLE);
+                TextView reg_start = (TextView) findViewById(R.id.register_start);
+                reg_start.setVisibility(View.VISIBLE);
+                TextView reg_end = (TextView) findViewById(R.id.register_end);
+                reg_end.setVisibility(View.VISIBLE);
+
+                delete.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+                edit.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
                 if(isOwner) {
-                    //Don't show any buttons.
                 }else if(obj.getBoolean("attending")) {
                     Button button = (Button) findViewById(R.id.unattend_button);
                     button.setVisibility(View.VISIBLE);
@@ -122,7 +132,6 @@ public class EventActivity extends Activity{
         } catch (JSONException e) {
             Toast.makeText(getApplicationContext(), "Error: " + e, Toast.LENGTH_LONG).show();
             e.printStackTrace();
-
         }
     }
 
